@@ -16,8 +16,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:selectedCheckbox'])
 
-const updateSelectedOption = (value) => {
-  if (typeof value !== 'boolean' && value !== null) emit('update:selectedCheckbox', value)
+const updateSelectedOption = value => {
+  if (typeof value !== 'boolean' && value !== null)
+    emit('update:selectedCheckbox', value)
 }
 </script>
 
@@ -52,9 +53,7 @@ const updateSelectedOption = (value) => {
               <span
                 v-if="item.subtitle"
                 class="text-disabled text-body-2"
-              >{{
-                item.subtitle
-              }}</span>
+              >{{ item.subtitle }}</span>
             </div>
             <p class="text-sm mb-0">
               {{ item.desc }}
@@ -68,17 +67,17 @@ const updateSelectedOption = (value) => {
 
 <style lang="scss" scoped>
 .custom-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
 
-    .v-checkbox {
-        margin-block-start: -0.375rem;
-    }
+  .v-checkbox {
+    margin-block-start: -0.375rem;
+  }
 
-    .cr-title {
-        font-weight: 500;
-        line-height: 1.375rem;
-    }
+  .cr-title {
+    font-weight: 500;
+    line-height: 1.375rem;
+  }
 }
 </style>

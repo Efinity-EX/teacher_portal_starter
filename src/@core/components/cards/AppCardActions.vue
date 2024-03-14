@@ -38,7 +38,13 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['collapsed', 'refresh', 'trash', 'initialLoad', 'update:loading'])
+const emit = defineEmits([
+  'collapsed',
+  'refresh',
+  'trash',
+  'initialLoad',
+  'update:loading',
+])
 
 defineOptions({
   inheritAttrs: false,
@@ -51,7 +57,7 @@ const $loading = computed({
     return props.loading !== undefined ? props.loading : _loading.value
   },
   set(value) {
-    props.loading !== undefined ? emit('update:loading', value) : (_loading.value = value)
+    props.loading !== undefined ? emit('update:loading', value) : _loading.value = value
   },
 })
 
@@ -104,30 +110,20 @@ const triggeredRemove = () => {
 
               <!-- 👉 Collapse button -->
               <IconBtn
-                v-if="
-                  (!(actionRemove || actionRefresh) || actionCollapsed) &&
-                    !noActions
-                "
+                v-if="(!(actionRemove || actionRefresh) || actionCollapsed) && !noActions"
                 @click="triggerCollapse"
               >
                 <VIcon
                   size="20"
                   icon="tabler-chevron-up"
-                  :style="{
-                    transform: isContentCollapsed
-                      ? 'rotate(-180deg)'
-                      : undefined,
-                  }"
-                  style="transition-duration: 0.28s"
+                  :style="{ transform: isContentCollapsed ? 'rotate(-180deg)' : undefined }"
+                  style="transition-duration: 0.28s;"
                 />
               </IconBtn>
 
               <!-- 👉 Overlay button -->
               <IconBtn
-                v-if="
-                  (!(actionRemove || actionCollapsed) || actionRefresh) &&
-                    !noActions
-                "
+                v-if="(!(actionRemove || actionCollapsed) || actionRefresh) && !noActions"
                 @click="triggerRefresh"
               >
                 <VIcon
@@ -138,10 +134,7 @@ const triggeredRemove = () => {
 
               <!-- 👉 Close button -->
               <IconBtn
-                v-if="
-                  (!(actionRefresh || actionCollapsed) || actionRemove) &&
-                    !noActions
-                "
+                v-if="(!(actionRefresh || actionCollapsed) || actionRemove) && !noActions"
                 @click="triggeredRemove"
               >
                 <VIcon
@@ -150,7 +143,7 @@ const triggeredRemove = () => {
                 />
               </IconBtn>
             </div>
-            <!-- !SECTION -->
+          <!-- !SECTION -->
           </template>
         </VCardItem>
 
@@ -181,10 +174,10 @@ const triggeredRemove = () => {
 
 <style lang="scss">
 .v-card-item {
-    + .v-card-content {
-        .v-card-text:first-child {
-            padding-block-start: 0;
-        }
+  +.v-card-content {
+    .v-card-text:first-child {
+      padding-block-start: 0;
     }
+  }
 }
 </style>

@@ -1,30 +1,25 @@
 import { hexToRgb } from '@layouts/utils'
 
+
 // 👉 Colors variables
-const colorVariables = (themeColors) => {
+const colorVariables = themeColors => {
   const themeSecondaryTextColor = `rgba(${hexToRgb(themeColors.colors['on-surface'])},${themeColors.variables['medium-emphasis-opacity']})`
   const themeDisabledTextColor = `rgba(${hexToRgb(themeColors.colors['on-surface'])},${themeColors.variables['disabled-opacity']})`
   const themeBorderColor = `rgba(${hexToRgb(String(themeColors.variables['border-color']))},${themeColors.variables['border-opacity']})`
   const themePrimaryTextColor = `rgba(${hexToRgb(themeColors.colors['on-surface'])},${themeColors.variables['high-emphasis-opacity']})`
-
-  return {
-    themeSecondaryTextColor,
-    themeDisabledTextColor,
-    themeBorderColor,
-    themePrimaryTextColor,
-  }
+  
+  return { themeSecondaryTextColor, themeDisabledTextColor, themeBorderColor, themePrimaryTextColor }
 }
 
-export const getScatterChartConfig = (themeColors) => {
+export const getScatterChartConfig = themeColors => {
   const scatterColors = {
     series1: '#ff9f43',
     series2: '#7367f0',
     series3: '#28c76f',
   }
 
-  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } =
-        colorVariables(themeColors)
-
+  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -66,14 +61,14 @@ export const getScatterChartConfig = (themeColors) => {
       },
       labels: {
         style: { colors: themeDisabledTextColor },
-        formatter: (val) => Number.parseFloat(val).toFixed(1),
+        formatter: val => Number.parseFloat(val).toFixed(1),
       },
     },
   }
 }
-export const getLineChartSimpleConfig = (themeColors) => {
+export const getLineChartSimpleConfig = themeColors => {
   const { themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
-
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -137,9 +132,9 @@ export const getLineChartSimpleConfig = (themeColors) => {
     },
   }
 }
-export const getBarChartConfig = (themeColors) => {
+export const getBarChartConfig = themeColors => {
   const { themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
-
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -171,29 +166,21 @@ export const getBarChartConfig = (themeColors) => {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { color: themeBorderColor },
-      categories: [
-        'MON, 11',
-        'THU, 14',
-        'FRI, 15',
-        'MON, 18',
-        'WED, 20',
-        'FRI, 21',
-        'MON, 23',
-      ],
+      categories: ['MON, 11', 'THU, 14', 'FRI, 15', 'MON, 18', 'WED, 20', 'FRI, 21', 'MON, 23'],
       labels: {
         style: { colors: themeDisabledTextColor, fontSize: '0.8125rem' },
       },
     },
   }
 }
-export const getCandlestickChartConfig = (themeColors) => {
+export const getCandlestickChartConfig = themeColors => {
   const candlestickColors = {
     series1: '#28c76f',
     series2: '#ea5455',
   }
 
   const { themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
-
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -237,7 +224,7 @@ export const getCandlestickChartConfig = (themeColors) => {
     },
   }
 }
-export const getRadialBarChartConfig = (themeColors) => {
+export const getRadialBarChartConfig = themeColors => {
   const radialBarColors = {
     series1: '#fdd835',
     series2: '#32baff',
@@ -247,7 +234,7 @@ export const getRadialBarChartConfig = (themeColors) => {
   }
 
   const { themeSecondaryTextColor, themePrimaryTextColor } = colorVariables(themeColors)
-
+  
   return {
     stroke: { lineCap: 'round' },
     labels: ['Comments', 'Replies', 'Shares'],
@@ -289,13 +276,14 @@ export const getRadialBarChartConfig = (themeColors) => {
             fontSize: '1.125rem',
             color: themePrimaryTextColor,
             formatter(w) {
-              const totalValue =
-                                w.globals.seriesTotals.reduce((a, b) => {
-                                  return a + b
-                                }, 0) / w.globals.series.length
+              const totalValue = w.globals.seriesTotals.reduce((a, b) => {
+                return a + b
+              }, 0) / w.globals.series.length
 
-              if (totalValue % 1 === 0) return `${totalValue}%`
-              else return `${totalValue.toFixed(2)}%`
+              if (totalValue % 1 === 0)
+                return `${totalValue}%`
+              else
+                return `${totalValue.toFixed(2)}%`
             },
           },
         },
@@ -309,7 +297,7 @@ export const getRadialBarChartConfig = (themeColors) => {
     },
   }
 }
-export const getDonutChartConfig = (themeColors) => {
+export const getDonutChartConfig = themeColors => {
   const donutColors = {
     series1: '#fdd835',
     series2: '#00d4bd',
@@ -319,19 +307,14 @@ export const getDonutChartConfig = (themeColors) => {
   }
 
   const { themeSecondaryTextColor, themePrimaryTextColor } = colorVariables(themeColors)
-
+  
   return {
     stroke: { width: 0 },
     labels: ['Operational', 'Networking', 'Hiring', 'R&D'],
-    colors: [
-      donutColors.series1,
-      donutColors.series5,
-      donutColors.series3,
-      donutColors.series2,
-    ],
+    colors: [donutColors.series1, donutColors.series5, donutColors.series3, donutColors.series2],
     dataLabels: {
       enabled: true,
-      formatter: (val) => `${Number.parseInt(val, 10)}%`,
+      formatter: val => `${Number.parseInt(val, 10)}%`,
     },
     legend: {
       position: 'bottom',
@@ -354,7 +337,7 @@ export const getDonutChartConfig = (themeColors) => {
             value: {
               fontSize: '1.125rem',
               color: themeSecondaryTextColor,
-              formatter: (val) => `${Number.parseInt(val, 10)}`,
+              formatter: val => `${Number.parseInt(val, 10)}`,
             },
             total: {
               show: true,
@@ -408,16 +391,15 @@ export const getDonutChartConfig = (themeColors) => {
     ],
   }
 }
-export const getAreaChartSplineConfig = (themeColors) => {
+export const getAreaChartSplineConfig = themeColors => {
   const areaColors = {
     series3: '#e0cffe',
     series2: '#b992fe',
     series1: '#ab7efd',
   }
 
-  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } =
-        colorVariables(themeColors)
-
+  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -487,16 +469,15 @@ export const getAreaChartSplineConfig = (themeColors) => {
     },
   }
 }
-export const getColumnChartConfig = (themeColors) => {
+export const getColumnChartConfig = themeColors => {
   const columnColors = {
     series1: '#826af9',
     series2: '#d2b0ff',
     bg: '#f8d3ff',
   }
 
-  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } =
-        colorVariables(themeColors)
-
+  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
+  
   return {
     chart: {
       offsetX: -10,
@@ -530,13 +511,7 @@ export const getColumnChartConfig = (themeColors) => {
         columnWidth: '15%',
         colors: {
           backgroundBarRadius: 10,
-          backgroundBarColors: [
-            columnColors.bg,
-            columnColors.bg,
-            columnColors.bg,
-            columnColors.bg,
-            columnColors.bg,
-          ],
+          backgroundBarColors: [columnColors.bg, columnColors.bg, columnColors.bg, columnColors.bg, columnColors.bg],
         },
       },
     },
@@ -554,17 +529,7 @@ export const getColumnChartConfig = (themeColors) => {
     xaxis: {
       axisBorder: { show: false },
       axisTicks: { color: themeBorderColor },
-      categories: [
-        '7/12',
-        '8/12',
-        '9/12',
-        '10/12',
-        '11/12',
-        '12/12',
-        '13/12',
-        '14/12',
-        '15/12',
-      ],
+      categories: ['7/12', '8/12', '9/12', '10/12', '11/12', '12/12', '13/12', '14/12', '15/12'],
       crosshairs: {
         stroke: { color: themeBorderColor },
       },
@@ -586,9 +551,9 @@ export const getColumnChartConfig = (themeColors) => {
     ],
   }
 }
-export const getHeatMapChartConfig = (themeColors) => {
+export const getHeatMapChartConfig = themeColors => {
   const { themeSecondaryTextColor, themeDisabledTextColor } = colorVariables(themeColors)
-
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -646,15 +611,14 @@ export const getHeatMapChartConfig = (themeColors) => {
     },
   }
 }
-export const getRadarChartConfig = (themeColors) => {
+export const getRadarChartConfig = themeColors => {
   const radarColors = {
     series1: '#9b88fa',
     series2: '#ffa1a1',
   }
 
-  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } =
-        colorVariables(themeColors)
-
+  const { themeSecondaryTextColor, themeBorderColor, themeDisabledTextColor } = colorVariables(themeColors)
+  
   return {
     chart: {
       parentHeightOffset: 0,
@@ -704,16 +668,7 @@ export const getRadarChartConfig = (themeColors) => {
     },
     yaxis: { show: false },
     xaxis: {
-      categories: [
-        'Battery',
-        'Brand',
-        'Camera',
-        'Memory',
-        'Storage',
-        'Display',
-        'OS',
-        'Price',
-      ],
+      categories: ['Battery', 'Brand', 'Camera', 'Memory', 'Storage', 'Display', 'OS', 'Price'],
       labels: {
         style: {
           fontSize: '0.8125rem',

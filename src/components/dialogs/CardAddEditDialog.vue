@@ -18,7 +18,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['submit', 'update:isDialogVisible'])
+const emit = defineEmits([
+  'submit',
+  'update:isDialogVisible',
+])
 
 const cardDetails = ref(structuredClone(toRaw(props.cardDetails)))
 
@@ -30,7 +33,7 @@ const formSubmit = () => {
   emit('submit', cardDetails.value)
 }
 
-const dialogModelValueUpdate = (val) => {
+const dialogModelValueUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 </script>
@@ -53,11 +56,7 @@ const dialogModelValueUpdate = (val) => {
           </h4>
         </VCardTitle>
         <p class="text-body-1 mb-0">
-          {{
-            props.cardDetails.name
-              ? 'Edit your saved card details'
-              : 'Add card for future billing'
-          }}
+          {{ props.cardDetails.name ? 'Edit your saved card details' : 'Add card for future billing' }}
         </p>
       </VCardItem>
 

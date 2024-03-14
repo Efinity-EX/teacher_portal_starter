@@ -1,5 +1,8 @@
 <script setup>
-import { HorizontalNavGroup, HorizontalNavLink } from '@layouts/components'
+import {
+  HorizontalNavGroup,
+  HorizontalNavLink,
+} from '@layouts/components'
 
 const props = defineProps({
   navItems: {
@@ -8,9 +11,10 @@ const props = defineProps({
   },
 })
 
-const resolveNavItemComponent = (item) => {
-  if ('children' in item) return HorizontalNavGroup
-
+const resolveNavItemComponent = item => {
+  if ('children' in item)
+    return HorizontalNavGroup
+  
   return HorizontalNavLink
 }
 </script>
@@ -28,9 +32,9 @@ const resolveNavItemComponent = (item) => {
 
 <style lang="scss">
 .layout-wrapper.layout-nav-type-horizontal {
-    .nav-items {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  .nav-items {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 </style>

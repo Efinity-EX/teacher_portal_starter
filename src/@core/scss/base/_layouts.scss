@@ -1,4 +1,4 @@
-@use '@configured-variables' as variables;
+@use "@configured-variables" as variables;
 
 /* ℹ️ This styles extends the existing layout package's styles for handling cases that aren't related to layouts package */
 
@@ -16,48 +16,48 @@
 //   }
 // }
 .layout-wrapper.layout-nav-type-vertical {
-    &.layout-content-height-fixed {
-        .page-content-container {
-            > .v-layout:first-child {
-                overflow: hidden;
-                min-block-size: 100%;
+  &.layout-content-height-fixed {
+    .page-content-container {
+      > .v-layout:first-child {
+        overflow: hidden;
+        min-block-size: 100%;
 
-                > .v-main {
-                    // overflow-y: auto;
+        > .v-main {
+          // overflow-y: auto;
 
-                    .v-main__wrap > :first-child {
-                        block-size: 100%;
-                        overflow-y: auto;
-                    }
-                }
-            }
+          .v-main__wrap > :first-child {
+            block-size: 100%;
+            overflow-y: auto;
+          }
         }
+      }
     }
+  }
 }
 
 // ℹ️ Let div/v-layout take full height. E.g. Email App
 .layout-wrapper.layout-nav-type-horizontal {
-    &.layout-content-height-fixed {
-        > .layout-page-content {
-            display: flex;
-        }
+  &.layout-content-height-fixed {
+    > .layout-page-content {
+      display: flex;
     }
+  }
 }
 
 // 👉 Floating navbar styles
-@if variables.$vertical-nav-navbar-style == 'floating' {
-    // ℹ️ Add spacing above navbar if navbar is floating (was in %layout-navbar-sticky placeholder)
-    body .layout-wrapper.layout-nav-type-vertical.layout-navbar-sticky {
-        .layout-navbar {
-            inset-block-start: variables.$vertical-nav-floating-navbar-top;
-        }
+@if variables.$vertical-nav-navbar-style == "floating" {
+  // ℹ️ Add spacing above navbar if navbar is floating (was in %layout-navbar-sticky placeholder)
+  body .layout-wrapper.layout-nav-type-vertical.layout-navbar-sticky {
+    .layout-navbar {
+      inset-block-start: variables.$vertical-nav-floating-navbar-top;
+    }
 
-        /*
+    /*
       ℹ️ If it's floating navbar
       Add `vertical-nav-floating-navbar-top` as margin top to .layout-page-content
     */
-        .layout-page-content {
-            margin-block-start: variables.$vertical-nav-floating-navbar-top;
-        }
+    .layout-page-content {
+      margin-block-start: variables.$vertical-nav-floating-navbar-top;
     }
+  }
 }

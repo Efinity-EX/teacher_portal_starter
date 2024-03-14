@@ -26,7 +26,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'submit'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'submit',
+])
 
 const billingAddress = ref(structuredClone(toRaw(props.billingAddress)))
 
@@ -66,9 +69,9 @@ const addressTypes = [
 
 <template>
   <VDialog
-    :width="$vuetify.display.smAndDown ? 'auto' : 900"
+    :width="$vuetify.display.smAndDown ? 'auto' : 900 "
     :model-value="props.isDialogVisible"
-    @update:model-value="(val) => $emit('update:isDialogVisible', val)"
+    @update:model-value="val => $emit('update:isDialogVisible', val)"
   >
     <!-- 👉 Dialog close btn -->
     <DialogCloseBtn @click="$emit('update:isDialogVisible', false)" />
@@ -80,12 +83,7 @@ const addressTypes = [
       <VCardText>
         <!-- 👉 Title -->
         <h4 class="text-h4 text-center mb-2">
-          {{
-            props.billingAddress.addressLine1 || props.billingAddress.addressLine2
-              ? 'Edit'
-              : 'Add New'
-          }}
-          Address
+          {{ (props.billingAddress.addressLine1 || props.billingAddress.addressLine2) ? 'Edit' : 'Add New' }} Address
         </h4>
         <p class="text-body-1 text-center mb-6">
           Add new address for express delivery

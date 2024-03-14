@@ -17,7 +17,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:isDialogVisible'])
 
-const dialogVisibleUpdate = (val) => {
+const dialogVisibleUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 
@@ -142,12 +142,7 @@ const membersList = [
                 <VMenu activator="parent">
                   <VList :selected="[member.permission]">
                     <VListItem
-                      v-for="(item, index) in [
-                        'Owner',
-                        'Can Edit',
-                        'Can Comment',
-                        'Can View',
-                      ]"
+                      v-for="(item, index) in ['Owner', 'Can Edit', 'Can Comment', 'Can View']"
                       :key="index"
                       :value="item"
                     >
@@ -184,8 +179,8 @@ const membersList = [
 
 <style lang="scss">
 .share-project-dialog {
-    .card-list {
-        --v-card-list-gap: 1rem;
-    }
+  .card-list {
+    --v-card-list-gap: 1rem;
+  }
 }
 </style>

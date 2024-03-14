@@ -2,7 +2,11 @@
 import { layoutConfig } from '@layouts'
 import { can } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
-import { getComputedNavLinkToProp, getDynamicI18nProps, isNavLinkActive } from '@layouts/utils'
+import {
+  getComputedNavLinkToProp,
+  getDynamicI18nProps,
+  isNavLinkActive,
+} from '@layouts/utils'
 
 const props = defineProps({
   item: {
@@ -24,9 +28,7 @@ const hideTitleAndBadge = configStore.isVerticalNavMini()
     <Component
       :is="item.to ? 'RouterLink' : 'a'"
       v-bind="getComputedNavLinkToProp(item)"
-      :class="{
-        'router-link-active router-link-exact-active': isNavLinkActive(item, $router),
-      }"
+      :class="{ 'router-link-active router-link-exact-active': isNavLinkActive(item, $router) }"
     >
       <Component
         :is="layoutConfig.app.iconRenderer || 'div'"
@@ -64,9 +66,9 @@ const hideTitleAndBadge = configStore.isVerticalNavMini()
 
 <style lang="scss">
 .layout-vertical-nav {
-    .nav-link a {
-        display: flex;
-        align-items: center;
-    }
+  .nav-link a {
+    display: flex;
+    align-items: center;
+  }
 }
 </style>

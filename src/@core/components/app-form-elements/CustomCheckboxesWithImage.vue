@@ -16,8 +16,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:selectedCheckbox'])
 
-const updateSelectedOption = (value) => {
-  if (typeof value !== 'boolean' && value !== null) emit('update:selectedCheckbox', value)
+const updateSelectedOption = value => {
+  if (typeof value !== 'boolean' && value !== null)
+    emit('update:selectedCheckbox', value)
 }
 </script>
 
@@ -68,27 +69,27 @@ const updateSelectedOption = (value) => {
 
 <style lang="scss" scoped>
 .custom-checkbox {
-    position: relative;
-    padding: 0;
+  position: relative;
+  padding: 0;
 
-    .custom-checkbox-image {
-        block-size: 100%;
-        inline-size: 100%;
-        min-inline-size: 100%;
-    }
+  .custom-checkbox-image {
+    block-size: 100%;
+    inline-size: 100%;
+    min-inline-size: 100%;
+  }
 
+  .v-checkbox {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    visibility: hidden;
+  }
+
+  &:hover,
+  &.active {
     .v-checkbox {
-        position: absolute;
-        inset-block-start: 0;
-        inset-inline-end: 0;
-        visibility: hidden;
+      visibility: visible;
     }
-
-    &:hover,
-    &.active {
-        .v-checkbox {
-            visibility: visible;
-        }
-    }
+  }
 }
 </style>

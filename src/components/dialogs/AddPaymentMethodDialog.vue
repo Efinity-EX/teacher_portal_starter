@@ -25,7 +25,7 @@ const americanEx = useGenerateImageVariant(americanExLight, americanExDark)
 const jcb = useGenerateImageVariant(jcbLight, jcbDark)
 const dc = useGenerateImageVariant(dcLight, dcDark)
 
-const dialogVisibleUpdate = (val) => {
+const dialogVisibleUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 
@@ -106,12 +106,12 @@ const paymentMethodsData = [
 
 <style lang="scss">
 .refer-link-input {
-    .v-field--appended {
-        padding-inline-end: 0;
-    }
+  .v-field--appended {
+    padding-inline-end: 0;
+  }
 
-    .v-field__append-inner {
-        padding-block-start: 0.125rem;
-    }
+  .v-field__append-inner {
+    padding-block-start: 0.125rem;
+  }
 }
 </style>

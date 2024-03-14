@@ -35,7 +35,7 @@ const plansList = [
 
 const isConfirmDialogVisible = ref(false)
 
-const dialogModelValueUpdate = (val) => {
+const dialogModelValueUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 </script>
@@ -86,7 +86,9 @@ const dialogModelValueUpdate = (val) => {
             <h1 class="text-h1 text-primary">
               99
             </h1>
-            <sub class="text-body-2 mt-5"> / month </sub>
+            <sub class="text-body-2 mt-5">
+              / month
+            </sub>
           </div>
           <VBtn
             color="error"

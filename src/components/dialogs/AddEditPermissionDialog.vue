@@ -11,7 +11,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'update:permissionName'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'update:permissionName',
+])
 
 const currentPermissionName = ref('')
 
@@ -46,7 +49,7 @@ watch(props, () => {
           {{ props.permissionName ? 'Edit' : 'Add' }} Permission
         </h4>
         <p class="text-body-1 text-center mb-6">
-          {{ props.permissionName ? 'Edit' : 'Add' }} permission as per your requirements.
+          {{ props.permissionName ? 'Edit' : 'Add' }}  permission as per your requirements.
         </p>
 
         <!-- 👉 Form -->
@@ -58,8 +61,7 @@ watch(props, () => {
             class="mb-6"
           >
             <template #text>
-              By {{ props.permissionName ? 'editing' : 'adding' }} the permission
-              name, you might break the system permissions functionality.
+              By {{ props.permissionName ? 'editing' : 'adding' }} the permission name, you might break the system permissions functionality.
             </template>
           </VAlert>
 
@@ -84,10 +86,10 @@ watch(props, () => {
 
 <style lang="scss">
 .permission-table {
-    td {
-        border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-        padding-block: 0.5rem;
-        padding-inline: 0;
-    }
+  td {
+    border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+    padding-block: 0.5rem;
+    padding-inline: 0;
+  }
 }
 </style>

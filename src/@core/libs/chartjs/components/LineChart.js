@@ -1,13 +1,4 @@
-import {
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Title,
-  Tooltip,
-} from 'chart.js'
+import { CategoryScale, Chart as ChartJS, Legend, LineElement, LinearScale, PointElement, Title, Tooltip } from 'chart.js'
 import { defineComponent } from 'vue'
 import { Line } from 'vue-chartjs'
 
@@ -49,16 +40,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    return () =>
-      h(h(Line), {
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins,
-        options: props.chartOptions,
-        data: props.chartData,
-      })
+    return () => h(h(Line), {
+      chartId: props.chartId,
+      width: props.width,
+      height: props.height,
+      cssClasses: props.cssClasses,
+      styles: props.styles,
+      plugins: props.plugins,
+      options: props.chartOptions,
+      data: props.chartData,
+    })
   },
 })

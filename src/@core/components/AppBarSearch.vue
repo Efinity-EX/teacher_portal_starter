@@ -1,6 +1,9 @@
 <script setup>
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
-import { VList, VListItem } from 'vuetify/components/VList'
+import {
+  VList,
+  VListItem,
+} from 'vuetify/components/VList'
 
 const props = defineProps({
   isDialogVisible: {
@@ -17,7 +20,11 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'search'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'search',
+])
+
 
 // 👉 Hotkey
 
@@ -25,7 +32,8 @@ const emit = defineEmits(['update:isDialogVisible', 'search'])
 const { ctrl_k, meta_k } = useMagicKeys({
   passive: false,
   onEventFired(e) {
-    if (e.ctrlKey && e.key === 'k' && e.type === 'keydown') e.preventDefault()
+    if (e.ctrlKey && e.key === 'k' && e.type === 'keydown')
+      e.preventDefault()
   },
 })
 
@@ -36,7 +44,10 @@ const searchQueryLocal = ref('')
 // 👉 watching control + / to open dialog
 
 /* eslint-disable camelcase */
-watch([ctrl_k, meta_k], () => {
+watch([
+  ctrl_k,
+  meta_k,
+], () => {
   emit('update:isDialogVisible', true)
 })
 
@@ -48,7 +59,7 @@ const clearSearchAndCloseDialog = () => {
   emit('update:isDialogVisible', false)
 }
 
-const getFocusOnSearchList = (e) => {
+const getFocusOnSearchList = e => {
   if (e.key === 'ArrowDown') {
     e.preventDefault()
     refSearchList.value?.focus('next')
@@ -58,17 +69,14 @@ const getFocusOnSearchList = (e) => {
   }
 }
 
-const dialogModelValueUpdate = (val) => {
+const dialogModelValueUpdate = val => {
   searchQueryLocal.value = ''
   emit('update:isDialogVisible', val)
 }
 
-watch(
-  () => props.isDialogVisible,
-  () => {
-    searchQueryLocal.value = ''
-  }
-)
+watch(() => props.isDialogVisible, () => {
+  searchQueryLocal.value = ''
+})
 </script>
 
 <template>
@@ -88,7 +96,7 @@ watch(
     >
       <VCardText
         class="px-4"
-        style="padding-block: 1rem 1.2rem"
+        style="padding-block: 1rem 1.2rem;"
       >
         <!-- 👉 Search Input -->
         <VTextField
@@ -211,70 +219,70 @@ watch(
 
 <style lang="scss">
 .app-bar-search-suggestions {
-    .app-bar-search-suggestion {
-        &:hover {
-            color: rgb(var(--v-theme-primary));
-        }
+  .app-bar-search-suggestion {
+    &:hover {
+      color: rgb(var(--v-theme-primary));
     }
+  }
 }
 
 .app-bar-search-dialog {
-    .app-bar-search-input {
-        .v-field__input {
-            padding-block-start: 0.2rem;
-        }
+  .app-bar-search-input {
+    .v-field__input {
+      padding-block-start: 0.2rem;
+    }
+  }
+
+  .app-bar-search-list {
+    .v-list-item,
+    .v-list-subheader {
+      font-size: 0.75rem;
+      padding-inline: 1rem;
     }
 
-    .app-bar-search-list {
-        .v-list-item,
-        .v-list-subheader {
-            font-size: 0.75rem;
-            padding-inline: 1rem;
+    .v-list-item {
+      border-radius: 6px;
+      margin-block-end: 0.125rem;
+      margin-inline: 0.5rem;
+
+      .v-list-item__append {
+        .enter-icon {
+          visibility: hidden;
         }
+      }
 
-        .v-list-item {
-            border-radius: 6px;
-            margin-block-end: 0.125rem;
-            margin-inline: 0.5rem;
-
-            .v-list-item__append {
-                .enter-icon {
-                    visibility: hidden;
-                }
-            }
-
-            &:hover,
-            &:active,
-            &:focus {
-                .v-list-item__append {
-                    .enter-icon {
-                        visibility: visible;
-                    }
-                }
-            }
+      &:hover,
+      &:active,
+      &:focus {
+        .v-list-item__append {
+          .enter-icon {
+            visibility: visible;
+          }
         }
-
-        .v-list-subheader {
-            line-height: 1;
-            min-block-size: auto;
-            padding-block: 16px 8px;
-            padding-inline-start: 1rem;
-            text-transform: uppercase;
-        }
+      }
     }
+
+    .v-list-subheader {
+      line-height: 1;
+      min-block-size: auto;
+      padding-block: 16px 8px;
+      padding-inline-start: 1rem;
+      text-transform: uppercase;
+    }
+  }
 }
 
 @supports selector(:focus-visible) {
-    .app-bar-search-dialog {
-        .v-list-item:focus-visible::after {
-            content: none;
-        }
+  .app-bar-search-dialog {
+    .v-list-item:focus-visible::after {
+      content: none;
     }
+  }
 }
 </style>
 
 <style lang="scss" scoped>
 .card-list {
-    --v-card-list-gap: 16px;
+  --v-card-list-gap: 16px;
 }
 </style>

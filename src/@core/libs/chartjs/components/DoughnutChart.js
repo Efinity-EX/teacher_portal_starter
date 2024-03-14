@@ -40,16 +40,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    return () =>
-      h(h(Doughnut), {
-        data: props.chartData,
-        options: props.chartOptions,
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins,
-      })
+    return () => h(h(Doughnut), {
+      data: props.chartData,
+      options: props.chartOptions,
+      chartId: props.chartId,
+      width: props.width,
+      height: props.height,
+      cssClasses: props.cssClasses,
+      styles: props.styles,
+      plugins: props.plugins,
+    })
   },
 })

@@ -48,13 +48,14 @@ const aliases = {
 }
 
 export const iconify = {
-  component: (props) => {
+  component: props => {
     // Load custom SVG directly instead of going through icon component
     if (typeof props.icon === 'string') {
       const iconComponent = customIcons[props.icon]
-      if (iconComponent) return h(iconComponent)
+      if (iconComponent)
+        return h(iconComponent)
     }
-
+    
     return h(props.tag, {
       ...props,
 

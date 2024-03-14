@@ -8,7 +8,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'updatedData'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'updatedData',
+])
 
 const currentStep = ref(0)
 
@@ -130,16 +133,18 @@ const createAppData = ref({
   isSave: true,
 })
 
-const dialogVisibleUpdate = (val) => {
+const dialogVisibleUpdate = val => {
   emit('update:isDialogVisible', val)
   currentStep.value = 0
 }
 
 watch(props, () => {
-  if (!props.isDialogVisible) currentStep.value = 0
+  if (!props.isDialogVisible)
+    currentStep.value = 0
 })
 
 const onSubmit = () => {
+
   // eslint-disable-next-line no-alert
   alert('submitted...!!')
   emit('updatedData', createAppData.value)
@@ -453,6 +458,6 @@ const onSubmit = () => {
 
 <style lang="scss">
 .stepper-content .card-list {
-    --v-card-list-gap: 16px;
+  --v-card-list-gap: 16px;
 }
 </style>

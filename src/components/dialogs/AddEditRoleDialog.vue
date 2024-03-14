@@ -16,7 +16,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'update:rolePermissions'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'update:rolePermissions',
+])
 
 const permissions = ref([
   {
@@ -81,21 +84,20 @@ const refPermissionForm = ref()
 
 const checkedCount = computed(() => {
   let counter = 0
-  permissions.value.forEach((permission) => {
+  permissions.value.forEach(permission => {
     Object.entries(permission).forEach(([key, value]) => {
-      if (key !== 'name' && value) counter++
+      if (key !== 'name' && value)
+        counter++
     })
   })
-
+  
   return counter
 })
 
-const isIndeterminate = computed(
-  () => checkedCount.value > 0 && checkedCount.value < permissions.value.length * 3
-)
+const isIndeterminate = computed(() => checkedCount.value > 0 && checkedCount.value < permissions.value.length * 3)
 
-watch(isSelectAll, (val) => {
-  permissions.value = permissions.value.map((permission) => ({
+watch(isSelectAll, val => {
+  permissions.value = permissions.value.map(permission => ({
     ...permission,
     read: val,
     write: val,
@@ -103,30 +105,25 @@ watch(isSelectAll, (val) => {
   }))
 })
 watch(isIndeterminate, () => {
-  if (!isIndeterminate.value) isSelectAll.value = false
+  if (!isIndeterminate.value)
+    isSelectAll.value = false
 })
-watch(
-  permissions,
-  () => {
-    if (checkedCount.value === permissions.value.length * 3) isSelectAll.value = true
-  },
-  { deep: true }
-)
+watch(permissions, () => {
+  if (checkedCount.value === permissions.value.length * 3)
+    isSelectAll.value = true
+}, { deep: true })
 watch(props, () => {
   if (props.rolePermissions && props.rolePermissions.permissions.length) {
     role.value = props.rolePermissions.name
-    permissions.value = permissions.value.map((permission) => {
-      const rolePermission = props.rolePermissions?.permissions.find(
-        (item) => item.name === permission.name
-      )
-
+    permissions.value = permissions.value.map(permission => {
+      const rolePermission = props.rolePermissions?.permissions.find(item => item.name === permission.name)
       if (rolePermission) {
         return {
           ...permission,
           ...rolePermission,
         }
       }
-
+      
       return permission
     })
   }
@@ -265,21 +262,21 @@ const onReset = () => {
 
 <style lang="scss">
 .permission-table {
-    td {
-        border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-        padding-block: 0.5rem;
+  td {
+    border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+    padding-block: 0.5rem;
 
-        .v-checkbox {
-            min-inline-size: 4.75rem;
-        }
-
-        &:not(:first-child) {
-            padding-inline: 0.5rem;
-        }
-
-        .v-label {
-            white-space: nowrap;
-        }
+    .v-checkbox {
+      min-inline-size: 4.75rem;
     }
+
+    &:not(:first-child) {
+      padding-inline: 0.5rem;
+    }
+
+    .v-label {
+      white-space: nowrap;
+    }
+  }
 }
 </style>

@@ -1,15 +1,20 @@
 <script setup>
-import { useDropZone, useFileDialog, useObjectUrl } from '@vueuse/core'
+import {
+  useDropZone,
+  useFileDialog,
+  useObjectUrl,
+} from '@vueuse/core'
 
 const dropZoneRef = ref()
 const fileData = ref([])
 const { open, onChange } = useFileDialog({ accept: 'image/*' })
 function onDrop(DroppedFiles) {
-  DroppedFiles?.forEach((file) => {
+  DroppedFiles?.forEach(file => {
     if (file.type.slice(0, 6) !== 'image/') {
+
       // eslint-disable-next-line no-alert
       alert('Only image files are allowed')
-
+      
       return
     }
     fileData.value.push({
@@ -18,8 +23,9 @@ function onDrop(DroppedFiles) {
     })
   })
 }
-onChange((selectedFiles) => {
-  if (!selectedFiles) return
+onChange(selectedFiles => {
+  if (!selectedFiles)
+    return
   for (const file of selectedFiles) {
     fileData.value.push({
       file,
@@ -92,7 +98,9 @@ useDropZone(dropZoneRef, onDrop)
                       <span class="clamp-text text-wrap">
                         {{ item.file.name }}
                       </span>
-                      <span> {{ item.file.size / 1000 }} KB </span>
+                      <span>
+                        {{ item.file.size / 1000 }} KB
+                      </span>
                     </div>
                   </VCardText>
                   <VCardActions>
@@ -116,6 +124,6 @@ useDropZone(dropZoneRef, onDrop)
 
 <style lang="scss" scoped>
 .drop-zone {
-    border: 1px dashed rgba(var(--v-theme-on-surface), var(--v-border-opacity));
+  border: 1px dashed rgba(var(--v-theme-on-surface), var(--v-border-opacity));
 }
 </style>

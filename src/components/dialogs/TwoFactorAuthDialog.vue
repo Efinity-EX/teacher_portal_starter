@@ -69,8 +69,7 @@ const openSelectedMethodDialog = () => {
             Select Authentication Method
           </h4>
           <p class="text-body-1 text-center mb-6">
-            You also need to select a method by which the proxy authenticates to the
-            directory serve.
+            You also need to select a method by which the proxy authenticates to the directory serve.
           </p>
           <CustomRadios
             v-model:selected-radio="selectedMethod"

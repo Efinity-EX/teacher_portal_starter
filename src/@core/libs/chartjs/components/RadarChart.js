@@ -1,13 +1,4 @@
-import {
-  Chart as ChartJS,
-  Filler,
-  Legend,
-  LineElement,
-  PointElement,
-  RadialLinearScale,
-  Title,
-  Tooltip,
-} from 'chart.js'
+import { Chart as ChartJS, Filler, Legend, LineElement, PointElement, RadialLinearScale, Title, Tooltip } from 'chart.js'
 import { defineComponent } from 'vue'
 import { Radar } from 'vue-chartjs'
 
@@ -49,16 +40,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    return () =>
-      h(h(Radar), {
-        data: props.chartData,
-        options: props.chartOptions,
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins,
-      })
+    return () => h(h(Radar), {
+      data: props.chartData,
+      options: props.chartOptions,
+      chartId: props.chartId,
+      width: props.width,
+      height: props.height,
+      cssClasses: props.cssClasses,
+      styles: props.styles,
+      plugins: props.plugins,
+    })
   },
 })

@@ -11,7 +11,7 @@ const scrollToTop = () => {
 
 <template>
   <VScaleTransition
-    style="transform-origin: center"
+    style="transform-origin: center;"
     class="scroll-to-top d-print-none"
   >
     <VBtn
@@ -30,11 +30,11 @@ const scrollToTop = () => {
 
 <style lang="scss">
 .scroll-to-top {
-    position: fixed !important;
+  position: fixed !important;
 
-    // To keep button on top of v-layout. E.g. Email app
-    z-index: 999;
-    inset-block-end: 5%;
-    inset-inline-end: 25px;
+  // To keep button on top of v-layout. E.g. Email app
+  z-index: 999;
+  inset-block-end: 5%;
+  inset-inline-end: 25px;
 }
 </style>

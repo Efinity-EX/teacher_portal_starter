@@ -10,7 +10,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:isDialogVisible', 'submit'])
+const emit = defineEmits([
+  'update:isDialogVisible',
+  'submit',
+])
 
 const phoneNumber = ref(structuredClone(toRaw(props.mobileNumber)))
 
@@ -26,7 +29,7 @@ const resetPhoneNumber = () => {
   emit('update:isDialogVisible', false)
 }
 
-const dialogModelValueUpdate = (val) => {
+const dialogModelValueUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 </script>
@@ -47,8 +50,7 @@ const dialogModelValueUpdate = (val) => {
           Verify Your Mobile Number for SMS
         </h5>
         <p class="text-body-1 mb-6">
-          Enter your mobile phone number with country code and we will send you a
-          verification code.
+          Enter your mobile phone number with country code and  we will send you a verification code.
         </p>
 
         <VForm @submit.prevent="() => {}">

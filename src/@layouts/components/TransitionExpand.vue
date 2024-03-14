@@ -6,7 +6,7 @@ import { Transition } from 'vue'
 export default defineComponent({
   name: 'TransitionExpand',
   setup(_, { slots }) {
-    const onEnter = (element) => {
+    const onEnter = element => {
       const width = getComputedStyle(element).width
 
       element.style.width = width
@@ -36,11 +36,11 @@ export default defineComponent({
       })
     }
 
-    const onAfterEnter = (element) => {
+    const onAfterEnter = element => {
       element.style.height = 'auto'
     }
 
-    const onLeave = (element) => {
+    const onLeave = element => {
       const height = getComputedStyle(element).height
 
       element.style.height = height
@@ -54,17 +54,12 @@ export default defineComponent({
       })
     }
 
-    return () =>
-      h(
-        h(Transition),
-        {
-          name: 'expand',
-          onEnter,
-          onAfterEnter,
-          onLeave,
-        },
-        () => slots.default?.()
-      )
+    return () => h(h(Transition), {
+      name: 'expand',
+      onEnter,
+      onAfterEnter,
+      onLeave,
+    }, () => slots.default?.())
   },
 })
 </script>
@@ -72,21 +67,21 @@ export default defineComponent({
 <style>
 .expand-enter-active,
 .expand-leave-active {
-    overflow: hidden;
-    transition: block-size var(--expand-transition-duration, 0.25s) ease;
+  overflow: hidden;
+  transition: block-size var(--expand-transition-duration, 0.25s) ease;
 }
 
 .expand-enter-from,
 .expand-leave-to {
-    block-size: 0;
+  block-size: 0;
 }
 </style>
 
 <style scoped>
 * {
-    backface-visibility: hidden;
-    perspective: 1000px;
-    transform: translateZ(0);
-    will-change: block-size;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform: translateZ(0);
+  will-change: block-size;
 }
 </style>

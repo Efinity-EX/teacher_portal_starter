@@ -1,23 +1,21 @@
 import { hexToRgb } from '@layouts/utils'
 
+
 // 👉 Colors variables
-const colorVariables = (themeColors) => {
+const colorVariables = themeColors => {
   const themeSecondaryTextColor = `rgba(${hexToRgb(themeColors.colors['on-surface'])},${themeColors.variables['medium-emphasis-opacity']})`
   const themeDisabledTextColor = `rgba(${hexToRgb(themeColors.colors['on-surface'])},${themeColors.variables['disabled-opacity']})`
   const themeBorderColor = `rgba(${hexToRgb(String(themeColors.variables['border-color']))},${themeColors.variables['border-opacity']})`
-
-  return {
-    labelColor: themeDisabledTextColor,
-    borderColor: themeBorderColor,
-    legendColor: themeSecondaryTextColor,
-  }
+  
+  return { labelColor: themeDisabledTextColor, borderColor: themeBorderColor, legendColor: themeSecondaryTextColor }
 }
+
 
 // SECTION config
 // 👉 Latest Bar Chart Config
-export const getLatestBarChartConfig = (themeColors) => {
+export const getLatestBarChartConfig = themeColors => {
   const { borderColor, labelColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -52,9 +50,9 @@ export const getLatestBarChartConfig = (themeColors) => {
 }
 
 // 👉 Horizontal Bar Chart Config
-export const getHorizontalBarChartConfig = (themeColors) => {
+export const getHorizontalBarChartConfig = themeColors => {
   const { borderColor, labelColor, legendColor } = colorVariables(themeColors)
-
+  
   return {
     indexAxis: 'y',
     responsive: true,
@@ -101,9 +99,9 @@ export const getHorizontalBarChartConfig = (themeColors) => {
 }
 
 // 👉 Line Chart Config
-export const getLineChartConfig = (themeColors) => {
+export const getLineChartConfig = themeColors => {
   const { borderColor, labelColor, legendColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -146,9 +144,9 @@ export const getLineChartConfig = (themeColors) => {
 }
 
 // 👉 Radar Chart Config
-export const getRadarChartConfig = (themeColors) => {
+export const getRadarChartConfig = themeColors => {
   const { borderColor, labelColor, legendColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -181,9 +179,9 @@ export const getRadarChartConfig = (themeColors) => {
 }
 
 // 👉 Polar Chart Config
-export const getPolarChartConfig = (themeColors) => {
+export const getPolarChartConfig = themeColors => {
   const { legendColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -215,9 +213,9 @@ export const getPolarChartConfig = (themeColors) => {
 }
 
 // 👉 Bubble Chart Config
-export const getBubbleChartConfig = (themeColors) => {
+export const getBubbleChartConfig = themeColors => {
   const { borderColor, labelColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -271,9 +269,9 @@ export const getDoughnutChartConfig = () => {
 }
 
 // 👉 Scatter Chart Config
-export const getScatterChartConfig = (themeColors) => {
+export const getScatterChartConfig = themeColors => {
   const { borderColor, labelColor, legendColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,
@@ -327,9 +325,9 @@ export const getScatterChartConfig = (themeColors) => {
 }
 
 // 👉 Line Area Chart Config
-export const getLineAreaChartConfig = (themeColors) => {
+export const getLineAreaChartConfig = themeColors => {
   const { borderColor, labelColor, legendColor } = colorVariables(themeColors)
-
+  
   return {
     responsive: true,
     maintainAspectRatio: false,

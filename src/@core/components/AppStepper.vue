@@ -15,7 +15,10 @@ const props = defineProps({
     default: 'horizontal',
   },
   iconSize: {
-    type: [String, Number],
+    type: [
+      String,
+      Number,
+    ],
     required: false,
     default: 60,
   },
@@ -34,19 +37,8 @@ const props = defineProps({
 const emit = defineEmits(['update:currentStep'])
 
 const currentStep = ref(props.currentStep || 0)
-
-const activeOrCompletedStepsClasses = computed(
-  () => (index) =>
-    index < currentStep.value
-      ? 'stepper-steps-completed'
-      : index === currentStep.value
-        ? 'stepper-steps-active'
-        : ''
-)
-
-const isHorizontalAndNotLastStep = computed(
-  () => (index) => props.direction === 'horizontal' && props.items.length - 1 !== index
-)
+const activeOrCompletedStepsClasses = computed(() => index => index < currentStep.value ? 'stepper-steps-completed' : index === currentStep.value ? 'stepper-steps-active' : '')
+const isHorizontalAndNotLastStep = computed(() => index => props.direction === 'horizontal' && props.items.length - 1 !== index)
 
 // check if validation is enabled
 const isValidationEnabled = computed(() => {
@@ -54,11 +46,7 @@ const isValidationEnabled = computed(() => {
 })
 
 watchEffect(() => {
-  if (
-    props.currentStep !== undefined &&
-        props.currentStep < props.items.length &&
-        props.currentStep >= 0
-  )
+  if (props.currentStep !== undefined && props.currentStep < props.items.length && props.currentStep >= 0)
     currentStep.value = props.currentStep
   emit('update:currentStep', currentStep.value)
 })
@@ -80,14 +68,14 @@ watchEffect(() => {
       <div
         class="cursor-pointer app-stepper-step pa-1"
         :class="[
-          !props.isActiveStepValid && isValidationEnabled && 'stepper-steps-invalid',
+          (!props.isActiveStepValid && (isValidationEnabled)) && 'stepper-steps-invalid',
           activeOrCompletedStepsClasses(index),
         ]"
         @click="!isValidationEnabled && emit('update:currentStep', index)"
       >
         <!-- SECTION stepper step with icon -->
         <template v-if="item.icon">
-          <div class="stepper-icon-step text-high-emphasis d-flex align-center">
+          <div class="stepper-icon-step text-high-emphasis d-flex align-center ">
             <!-- 👉 icon and title -->
             <div
               class="d-flex align-center gap-x-3 step-wrapper"
@@ -136,11 +124,7 @@ watchEffect(() => {
               <!-- 👉 custom circle icon -->
               <template v-if="index >= currentStep">
                 <VAvatar
-                  v-if="
-                    !isValidationEnabled ||
-                      props.isActiveStepValid ||
-                      index !== currentStep
-                  "
+                  v-if="(!isValidationEnabled || props.isActiveStepValid || index !== currentStep)"
                   size="38"
                   rounded
                   :variant="index === currentStep ? 'elevated' : 'tonal'"
@@ -161,6 +145,7 @@ watchEffect(() => {
                   rounded
                 >
                   <VIcon
+
                     icon="tabler-alert-circle"
                     size="22"
                   />
@@ -179,7 +164,7 @@ watchEffect(() => {
               >
                 <h5
                   class="text-h5"
-                  style="color: rgb(var(--v-theme-primary))"
+                  style="color: rgb(var(--v-theme-primary));"
                 >
                   {{ index + 1 }}
                 </h5>
@@ -219,156 +204,156 @@ watchEffect(() => {
 </template>
 
 <style lang="scss">
-@use '@core/scss/template/mixins' as templateMixins;
+@use "@core/scss/template/mixins" as templateMixins;
 
 .app-stepper {
-    // 👉 stepper step with bg color
-    &.stepper-icon-step-bg {
-        .stepper-icon-step {
-            .step-wrapper {
-                flex-direction: row !important;
-            }
+  // 👉 stepper step with bg color
+  &.stepper-icon-step-bg {
+    .stepper-icon-step {
+      .step-wrapper {
+        flex-direction: row !important;
+      }
 
-            .stepper-icon {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 0.375rem;
-                background-color: rgba(var(--v-theme-on-surface), var(--v-selected-opacity));
-                block-size: 2.375rem;
-                color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
-                inline-size: 2.375rem;
-            }
-        }
-
-        .stepper-steps-active {
-            .stepper-icon-step {
-                .stepper-icon {
-                    @include templateMixins.custom-elevation(var(--v-theme-primary), 'sm');
-
-                    background-color: rgb(var(--v-theme-primary));
-                    color: rgba(var(--v-theme-on-primary));
-                }
-            }
-        }
-
-        .stepper-steps-completed {
-            .stepper-icon-step {
-                .stepper-icon {
-                    background: rgba(var(--v-theme-primary), var(--v-activated-opacity));
-                    color: rgba(var(--v-theme-primary));
-                }
-            }
-        }
+      .stepper-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.375rem;
+        background-color: rgba(var(--v-theme-on-surface), var(--v-selected-opacity));
+        block-size: 2.375rem;
+        color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
+        inline-size: 2.375rem;
+      }
     }
 
-    &.app-stepper-icons:not(.stepper-icon-step-bg) {
-        /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-steps-active {
+      .stepper-icon-step {
         .stepper-icon {
-            line-height: 0;
-        }
+          @include templateMixins.custom-elevation(var(--v-theme-primary), "sm");
 
-        .step-wrapper {
-            padding: 1.25rem;
-            gap: 0.5rem;
-            min-inline-size: 9.375rem;
+          background-color: rgb(var(--v-theme-primary));
+          color: rgba(var(--v-theme-on-primary));
         }
-
-        .stepper-chevron-indicator {
-            margin-inline: 1rem !important;
-        }
-
-        .stepper-steps-completed,
-        .stepper-steps-active {
-            .stepper-icon-step,
-            .stepper-step-icon,
-            .stepper-title,
-            .stepper-subtitle {
-                color: rgb(var(--v-theme-primary)) !important;
-            }
-        }
+      }
     }
 
-    // 👉 stepper step with icon and  default
+    .stepper-steps-completed {
+      .stepper-icon-step {
+        .stepper-icon {
+          background: rgba(var(--v-theme-primary), var(--v-activated-opacity));
+          color: rgba(var(--v-theme-primary));
+        }
+      }
+    }
+  }
+
+  &.app-stepper-icons:not(.stepper-icon-step-bg) {
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-icon {
+      line-height: 0;
+    }
+
+    .step-wrapper {
+      padding: 1.25rem;
+      gap: 0.5rem;
+      min-inline-size: 9.375rem;
+    }
+
+    .stepper-chevron-indicator {
+      margin-inline: 1rem !important;
+    }
+
+    .stepper-steps-completed,
+    .stepper-steps-active {
+      .stepper-icon-step,
+      .stepper-step-icon,
+      .stepper-title,
+      .stepper-subtitle {
+        color: rgb(var(--v-theme-primary)) !important;
+      }
+    }
+  }
+
+  // 👉 stepper step with icon and  default
+  .v-slide-group__content {
+    row-gap: 1rem;
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-title {
+      color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
+      font-size: 0.9375rem;
+      font-weight: 500 !important;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-subtitle {
+      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+      font-size: 0.8125rem;
+      line-height: 1.25rem;
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-chevron-indicator {
+      color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-steps-completed {
+      /* stylelint-disable-next-line no-descending-specificity */
+      .stepper-title,
+      .stepper-subtitle {
+        color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity));
+      }
+
+      .stepper-chevron-indicator {
+        color: rgb(var(--v-theme-primary));
+      }
+    }
+
+    /* stylelint-disable-next-line no-descending-specificity */
+    .stepper-steps-active {
+      .v-avatar.bg-primary {
+        @include templateMixins.custom-elevation(var(--v-theme-primary), "sm");
+      }
+
+      .v-avatar.bg-error {
+        @include templateMixins.custom-elevation(var(--v-theme-error), "sm");
+      }
+    }
+
+    .stepper-steps-invalid.stepper-steps-active {
+      .stepper-icon-step,
+      .step-number,
+      .stepper-title,
+      .stepper-subtitle {
+        color: rgb(var(--v-theme-error)) !important;
+      }
+    }
+
+    .app-stepper-step {
+      &:not(.stepper-steps-active,.stepper-steps-completed) .v-avatar--variant-tonal {
+        --v-activated-opacity: 0.06;
+      }
+    }
+  }
+
+  // 👉 stepper alignment
+  &.app-stepper-center {
     .v-slide-group__content {
-        row-gap: 1rem;
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .stepper-title {
-            color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity));
-            font-size: 0.9375rem;
-            font-weight: 500 !important;
-        }
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .stepper-subtitle {
-            color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
-            font-size: 0.8125rem;
-            line-height: 1.25rem;
-        }
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .stepper-chevron-indicator {
-            color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
-        }
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .stepper-steps-completed {
-            /* stylelint-disable-next-line no-descending-specificity */
-            .stepper-title,
-            .stepper-subtitle {
-                color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity));
-            }
-
-            .stepper-chevron-indicator {
-                color: rgb(var(--v-theme-primary));
-            }
-        }
-
-        /* stylelint-disable-next-line no-descending-specificity */
-        .stepper-steps-active {
-            .v-avatar.bg-primary {
-                @include templateMixins.custom-elevation(var(--v-theme-primary), 'sm');
-            }
-
-            .v-avatar.bg-error {
-                @include templateMixins.custom-elevation(var(--v-theme-error), 'sm');
-            }
-        }
-
-        .stepper-steps-invalid.stepper-steps-active {
-            .stepper-icon-step,
-            .step-number,
-            .stepper-title,
-            .stepper-subtitle {
-                color: rgb(var(--v-theme-error)) !important;
-            }
-        }
-
-        .app-stepper-step {
-            &:not(.stepper-steps-active, .stepper-steps-completed) .v-avatar--variant-tonal {
-                --v-activated-opacity: 0.06;
-            }
-        }
+      justify-content: center;
     }
+  }
 
-    // 👉 stepper alignment
-    &.app-stepper-center {
-        .v-slide-group__content {
-            justify-content: center;
-        }
+  &.app-stepper-start {
+    .v-slide-group__content {
+      justify-content: start;
     }
+  }
 
-    &.app-stepper-start {
-        .v-slide-group__content {
-            justify-content: start;
-        }
+  &.app-stepper-end {
+    .v-slide-group__content {
+      justify-content: end;
     }
-
-    &.app-stepper-end {
-        .v-slide-group__content {
-            justify-content: end;
-        }
-    }
+  }
 }
 </style>

@@ -26,19 +26,10 @@ const shallRenderIcon = configStore.isVerticalNavMini()
         mode="out-in"
       >
         <Component
-          :is="
-            shallRenderIcon
-              ? layoutConfig.app.iconRenderer
-              : layoutConfig.app.i18n.enable
-                ? 'i18n-t'
-                : 'span'
-          "
+          :is="shallRenderIcon ? layoutConfig.app.iconRenderer : layoutConfig.app.i18n.enable ? 'i18n-t' : 'span'"
           :key="shallRenderIcon"
           :class="shallRenderIcon ? 'placeholder-icon' : 'title-text'"
-          v-bind="{
-            ...layoutConfig.icons.sectionTitlePlaceholder,
-            ...getDynamicI18nProps(item.heading, 'span'),
-          }"
+          v-bind="{ ...layoutConfig.icons.sectionTitlePlaceholder, ...getDynamicI18nProps(item.heading, 'span') }"
         >
           {{ !shallRenderIcon ? item.heading : null }}
         </Component>

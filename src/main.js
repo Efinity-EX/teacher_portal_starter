@@ -9,6 +9,7 @@ import '@styles/styles.scss'
 // Create vue app
 const app = createApp(App)
 
+
 // Register plugins
 registerPlugins(app)
 

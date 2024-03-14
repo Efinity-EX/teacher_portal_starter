@@ -5,7 +5,7 @@ import { _setDirAttr } from '@layouts/utils'
 // ℹ️ We should not import themeConfig here but in urgency we are doing it for now
 import { layoutConfig } from '@themeConfig'
 
-export const namespaceConfig = (str) => `${layoutConfig.app.title}-${str}`
+export const namespaceConfig = str => `${layoutConfig.app.title}-${str}`
 export const cookieRef = (key, defaultValue) => {
   return useCookie(namespaceConfig(key), { default: () => defaultValue })
 }
@@ -19,10 +19,7 @@ export const useLayoutConfigStore = defineStore('layoutConfig', () => {
   const isNavbarBlurEnabled = cookieRef('isNavbarBlurEnabled', layoutConfig.navbar.navbarBlur)
 
   // 👉 Vertical Nav Collapsed
-  const isVerticalNavCollapsed = cookieRef(
-    'isVerticalNavCollapsed',
-    layoutConfig.verticalNav.isVerticalNavCollapsed
-  )
+  const isVerticalNavCollapsed = cookieRef('isVerticalNavCollapsed', layoutConfig.verticalNav.isVerticalNavCollapsed)
 
   // 👉 App Content Width
   const appContentWidth = cookieRef('appContentWidth', layoutConfig.app.contentWidth)
@@ -30,13 +27,15 @@ export const useLayoutConfigStore = defineStore('layoutConfig', () => {
   // 👉 App Content Layout Nav
   const appContentLayoutNav = ref(layoutConfig.app.contentLayoutNav)
 
-  watch(appContentLayoutNav, (val) => {
+  watch(appContentLayoutNav, val => {
     // If Navbar type is hidden while switching to horizontal nav => Reset it to sticky
     if (val === AppContentLayoutNav.Horizontal) {
-      if (navbarType.value === NavbarType.Hidden) navbarType.value = NavbarType.Sticky
+      if (navbarType.value === NavbarType.Hidden)
+        navbarType.value = NavbarType.Sticky
       isVerticalNavCollapsed.value = false
     }
   })
+
 
   // 👉 Horizontal Nav Type
   const horizontalNavType = ref(layoutConfig.horizontalNav.type)
@@ -48,28 +47,23 @@ export const useLayoutConfigStore = defineStore('layoutConfig', () => {
   const footerType = ref(layoutConfig.footer.type)
 
   // 👉 Misc
-  const isLessThanOverlayNavBreakpoint = computed(
-    () => useMediaQuery(`(max-width: ${layoutConfig.app.overlayNavFromBreakpoint}px)`).value
-  )
+  const isLessThanOverlayNavBreakpoint = computed(() => useMediaQuery(`(max-width: ${layoutConfig.app.overlayNavFromBreakpoint}px)`).value)
+
 
   // 👉 Layout Classes
   const _layoutClasses = computed(() => {
     const { y: windowScrollY } = useWindowScroll()
-
+    
     return [
       `layout-nav-type-${appContentLayoutNav.value}`,
       `layout-navbar-${navbarType.value}`,
       `layout-footer-${footerType.value}`,
       {
-        'layout-vertical-nav-collapsed':
-                    isVerticalNavCollapsed.value &&
-                    appContentLayoutNav.value === 'vertical' &&
-                    !isLessThanOverlayNavBreakpoint.value,
+        'layout-vertical-nav-collapsed': isVerticalNavCollapsed.value
+                    && appContentLayoutNav.value === 'vertical'
+                    && !isLessThanOverlayNavBreakpoint.value,
       },
-      {
-        [`horizontal-nav-${horizontalNavType.value}`]:
-                    appContentLayoutNav.value === 'horizontal',
-      },
+      { [`horizontal-nav-${horizontalNavType.value}`]: appContentLayoutNav.value === 'horizontal' },
       `layout-content-width-${appContentWidth.value}`,
       { 'layout-overlay-nav': isLessThanOverlayNavBreakpoint.value },
       { 'window-scrolled': unref(windowScrollY) },
@@ -77,13 +71,15 @@ export const useLayoutConfigStore = defineStore('layoutConfig', () => {
     ]
   })
 
+
   // 👉 RTL
   // const isAppRTL = ref(layoutConfig.app.isRTL)
   const isAppRTL = ref(false)
 
-  watch(isAppRTL, (val) => {
+  watch(isAppRTL, val => {
     _setDirAttr(val ? 'rtl' : 'ltr')
   })
+
 
   // 👉 Is Vertical Nav Mini
   /*
@@ -97,15 +93,9 @@ export const useLayoutConfigStore = defineStore('layoutConfig', () => {
           same component is providing & injecting we are getting undefined error
     */
   const isVerticalNavMini = (isVerticalNavHovered = null) => {
-    const isVerticalNavHoveredLocal =
-            isVerticalNavHovered || inject(injectionKeyIsVerticalNavHovered) || ref(false)
-
-    return computed(
-      () =>
-        isVerticalNavCollapsed.value &&
-                !isVerticalNavHoveredLocal.value &&
-                !isLessThanOverlayNavBreakpoint.value
-    )
+    const isVerticalNavHoveredLocal = isVerticalNavHovered || inject(injectionKeyIsVerticalNavHovered) || ref(false)
+    
+    return computed(() => isVerticalNavCollapsed.value && !isVerticalNavHoveredLocal.value && !isLessThanOverlayNavBreakpoint.value)
   }
 
   return {

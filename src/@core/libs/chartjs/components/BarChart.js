@@ -1,12 +1,4 @@
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  Title,
-  Tooltip,
-} from 'chart.js'
+import { BarElement, CategoryScale, Chart as ChartJS, Legend, LinearScale, Title, Tooltip } from 'chart.js'
 import { defineComponent } from 'vue'
 import { Bar } from 'vue-chartjs'
 
@@ -36,7 +28,7 @@ export default defineComponent({
     },
     plugins: {
       type: Array,
-      default: () => [],
+      default: () => ([]),
     },
     chartData: {
       type: Object,
@@ -48,16 +40,15 @@ export default defineComponent({
     },
   },
   setup(props) {
-    return () =>
-      h(h(Bar), {
-        data: props.chartData,
-        options: props.chartOptions,
-        chartId: props.chartId,
-        width: props.width,
-        height: props.height,
-        cssClasses: props.cssClasses,
-        styles: props.styles,
-        plugins: props.plugins,
-      })
+    return () => h(h(Bar), {
+      data: props.chartData,
+      options: props.chartOptions,
+      chartId: props.chartId,
+      width: props.width,
+      height: props.height,
+      cssClasses: props.cssClasses,
+      styles: props.styles,
+      plugins: props.plugins,
+    })
   },
 })

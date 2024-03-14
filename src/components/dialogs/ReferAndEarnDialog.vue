@@ -13,7 +13,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:isDialogVisible'])
 
-const dialogVisibleUpdate = (val) => {
+const dialogVisibleUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 
@@ -51,8 +51,7 @@ const referAndEarnSteps = [
           Refer & Earn
         </h4>
         <p class="text-body-1 mb-6 text-center">
-          Invite your friend to
-          <span class="text-capitalize">{{ themeConfig.app.title }}</span>, if they sign up, you and your friend will get 30 days free trial
+          Invite your friend to <span class="text-capitalize">{{ themeConfig.app.title }}</span>, if they sign up, you and your friend will get 30 days free trial
         </p>
 
         <VRow class="text-center mt-8">
@@ -172,8 +171,8 @@ const referAndEarnSteps = [
 
 <style lang="scss">
 .refer-link-input {
-    .v-field--appended {
-        padding-inline-end: 0;
-    }
+  .v-field--appended {
+    padding-inline-end: 0;
+  }
 }
 </style>

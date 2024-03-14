@@ -9,23 +9,38 @@ const props = defineProps({
     required: false,
   },
   xs: {
-    type: [Number, String],
+    type: [
+      Number,
+      String,
+    ],
     required: false,
   },
   sm: {
-    type: [Number, String],
+    type: [
+      Number,
+      String,
+    ],
     required: false,
   },
   md: {
-    type: [String, Number],
+    type: [
+      String,
+      Number,
+    ],
     required: false,
   },
   lg: {
-    type: [String, Number],
+    type: [
+      String,
+      Number,
+    ],
     required: false,
   },
   xl: {
-    type: [String, Number],
+    type: [
+      String,
+      Number,
+    ],
     required: false,
   },
 })
@@ -152,7 +167,7 @@ const pricingPlans = [
         :class="plan.isPopular ? 'border-primary border-opacity-100' : ''"
       >
         <VCardText
-          style="block-size: 3.75rem"
+          style="block-size: 3.75rem;"
           class="text-end"
         >
           <!-- 👉 Popular -->
@@ -191,11 +206,7 @@ const pricingPlans = [
                 $
               </div>
               <h1 class="text-h1 font-weight-medium text-primary">
-                {{
-                  annualMonthlyPlanPriceToggler
-                    ? Math.floor(Number(plan.yearlyPrice) / 12)
-                    : plan.monthlyPrice
-                }}
+                {{ annualMonthlyPlanPriceToggler ? Math.floor(Number(plan.yearlyPrice) / 12) : plan.monthlyPrice }}
               </h1>
               <div class="text-body-1 font-weight-medium align-self-end">
                 /month
@@ -251,17 +262,17 @@ const pricingPlans = [
 
 <style lang="scss" scoped>
 .card-list {
-    --v-card-list-gap: 1rem;
+  --v-card-list-gap: 1rem;
 }
 
 .save-upto-chip {
-    inset-block-start: -2.4rem;
-    inset-inline-end: -6rem;
+  inset-block-start: -2.4rem;
+  inset-inline-end: -6rem;
 }
 
 .annual-price-text {
-    inset-block-end: 3%;
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
+  inset-block-end: 3%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
 }
 </style>

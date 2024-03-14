@@ -1,7 +1,7 @@
 <script setup>
-import { useConfigStore } from '@core/stores/config'
 import Shepherd from 'shepherd.js'
 import { withQuery } from 'ufo'
+import { useConfigStore } from '@core/stores/config'
 
 defineOptions({
   // 👉 Is App Search Bar Visible
@@ -162,7 +162,7 @@ const closeSearchBar = () => {
   searchQuery.value = ''
 }
 
-const redirectToSuggestedPage = (selected) => {
+const redirectToSuggestedPage = selected => {
   router.push(selected.url)
   closeSearchBar()
 }
@@ -174,7 +174,7 @@ const LazyAppBarSearch = defineAsyncComponent(() => import('@core/components/App
   <div
     class="d-flex align-center cursor-pointer"
     v-bind="$attrs"
-    style="user-select: none"
+    style="user-select: none;"
     @click="isAppSearchBarVisible = !isAppSearchBarVisible"
   >
     <!-- 👉 Search Trigger button -->
@@ -212,7 +212,7 @@ const LazyAppBarSearch = defineAsyncComponent(() => import('@core/components/App
           >
             <p
               class="custom-letter-spacing text-disabled text-uppercase py-2 px-4 mb-0"
-              style="font-size: 0.75rem; line-height: 0.875rem"
+              style="font-size: 0.75rem; line-height: 0.875rem;"
             >
               {{ suggestion.title }}
             </p>
@@ -292,25 +292,25 @@ const LazyAppBarSearch = defineAsyncComponent(() => import('@core/components/App
 </template>
 
 <style lang="scss">
-@use '@styles/variables/vuetify.scss';
+@use "@styles/variables/vuetify.scss";
 
 .meta-key {
-    border: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
-    border-radius: 6px;
-    block-size: 1.5625rem;
-    font-size: 0.8125rem;
-    line-height: 1.3125rem;
-    padding-block: 0.125rem;
-    padding-inline: 0.25rem;
+  border: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+  border-radius: 6px;
+  block-size: 1.5625rem;
+  font-size: 0.8125rem;
+  line-height: 1.3125rem;
+  padding-block: 0.125rem;
+  padding-inline: 0.25rem;
 }
 
 .app-bar-search-dialog {
-    .custom-letter-spacing {
-        letter-spacing: 0.8px;
-    }
+  .custom-letter-spacing {
+    letter-spacing: 0.8px;
+  }
 
-    .card-list {
-        --v-card-list-gap: 8px;
-    }
+  .card-list {
+    --v-card-list-gap: 8px;
+  }
 }
 </style>

@@ -1,7 +1,10 @@
 <script setup>
 const props = defineProps({
   statusCode: {
-    type: [String, Number],
+    type: [
+      String,
+      Number,
+    ],
     required: false,
   },
   title: {
@@ -41,7 +44,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .header-title {
-    font-size: clamp(3rem, 5vw, 6rem);
-    line-height: clamp(3rem, 5vw, 6rem);
+  font-size: clamp(3rem, 5vw, 6rem);
+  line-height: clamp(3rem, 5vw, 6rem);
 }
 </style>

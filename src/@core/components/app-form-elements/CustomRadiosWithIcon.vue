@@ -16,8 +16,9 @@ const props = defineProps({
 
 const emit = defineEmits(['update:selectedRadio'])
 
-const updateSelectedOption = (value) => {
-  if (value !== null) emit('update:selectedRadio', value)
+const updateSelectedOption = value => {
+  if (value !== null)
+    emit('update:selectedRadio', value)
 }
 </script>
 
@@ -65,24 +66,24 @@ const updateSelectedOption = (value) => {
 
 <style lang="scss" scoped>
 .custom-radio-icon {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-    .v-radio {
-        margin-block-end: -0.5rem;
-    }
+  .v-radio {
+    margin-block-end: -0.5rem;
+  }
 }
 </style>
 
 <style lang="scss">
 .custom-radio-icon {
-    .v-radio {
-        margin-block-end: -0.25rem;
+  .v-radio {
+    margin-block-end: -0.25rem;
 
-        .v-selection-control__wrapper {
-            margin-inline-start: 0;
-        }
+    .v-selection-control__wrapper {
+      margin-inline-start: 0;
     }
+  }
 }
 </style>

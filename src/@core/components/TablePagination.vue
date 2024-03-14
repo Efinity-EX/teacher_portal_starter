@@ -16,7 +16,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:page'])
 
-const updatePage = (value) => {
+const updatePage = value => {
   emit('update:page', value)
 }
 </script>
@@ -34,9 +34,7 @@ const updatePage = (value) => {
         :model-value="page"
         active-color="primary"
         :length="Math.ceil(totalItems / itemsPerPage)"
-        :total-visible="
-          $vuetify.display.xs ? 1 : Math.min(Math.ceil(totalItems / itemsPerPage), 5)
-        "
+        :total-visible="$vuetify.display.xs ? 1 : Math.min(Math.ceil(totalItems / itemsPerPage), 5)"
         @update:model-value="updatePage"
       />
     </div>

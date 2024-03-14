@@ -25,42 +25,80 @@ const americanEx = useGenerateImageVariant(americanExLight, americanExDark)
 const jcb = useGenerateImageVariant(jcbLight, jcbDark)
 const dc = useGenerateImageVariant(dcLight, dcDark)
 
-const dialogVisibleUpdate = (val) => {
+const dialogVisibleUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 
 const paymentProvidersData = [
   {
     title: 'Adyen',
-    providers: [visa, masterCard, americanEx, jcb, dc],
+    providers: [
+      visa,
+      masterCard,
+      americanEx,
+      jcb,
+      dc,
+    ],
   },
   {
     title: '2Checkout',
-    providers: [visa, americanEx, jcb, dc],
+    providers: [
+      visa,
+      americanEx,
+      jcb,
+      dc,
+    ],
   },
   {
     title: 'Airpay',
-    providers: [visa, americanEx, masterCard, jcb],
+    providers: [
+      visa,
+      americanEx,
+      masterCard,
+      jcb,
+    ],
   },
   {
     title: 'Authorize.net',
-    providers: [americanEx, jcb, dc],
+    providers: [
+      americanEx,
+      jcb,
+      dc,
+    ],
   },
   {
     title: 'Bambora',
-    providers: [masterCard, americanEx, jcb],
+    providers: [
+      masterCard,
+      americanEx,
+      jcb,
+    ],
   },
   {
     title: 'Bambora',
-    providers: [visa, masterCard, americanEx, jcb, dc],
+    providers: [
+      visa,
+      masterCard,
+      americanEx,
+      jcb,
+      dc,
+    ],
   },
   {
     title: 'Chase Paymentech (Orbital)',
-    providers: [visa, americanEx, jcb, dc],
+    providers: [
+      visa,
+      americanEx,
+      jcb,
+      dc,
+    ],
   },
   {
     title: 'Checkout.com',
-    providers: [visa, masterCard],
+    providers: [
+      visa,
+      masterCard,
+    ],
   },
 ]
 </script>
@@ -110,12 +148,12 @@ const paymentProvidersData = [
 
 <style lang="scss">
 .refer-link-input {
-    .v-field--appended {
-        padding-inline-end: 0;
-    }
+  .v-field--appended {
+    padding-inline-end: 0;
+  }
 
-    .v-field__append-inner {
-        padding-block-start: 0.125rem;
-    }
+  .v-field__append-inner {
+    padding-block-start: 0.125rem;
+  }
 }
 </style>

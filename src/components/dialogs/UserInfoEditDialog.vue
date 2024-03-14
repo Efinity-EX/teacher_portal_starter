@@ -29,7 +29,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['submit', 'update:isDialogVisible'])
+const emit = defineEmits([
+  'submit',
+  'update:isDialogVisible',
+])
 
 const userData = ref(structuredClone(toRaw(props.userData)))
 const isUseAsBillingAddress = ref(false)
@@ -48,7 +51,7 @@ const onFormReset = () => {
   emit('update:isDialogVisible', false)
 }
 
-const dialogModelValueUpdate = (val) => {
+const dialogModelValueUpdate = val => {
   emit('update:isDialogVisible', val)
 }
 </script>

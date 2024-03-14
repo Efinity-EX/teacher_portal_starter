@@ -8,17 +8,20 @@ export const openGroups = ref([])
  * Return nav link props to use
  // @param {Object, String} item navigation routeName or route Object provided in navigation data
  */
-export const getComputedNavLinkToProp = computed(() => (link) => {
+export const getComputedNavLinkToProp = computed(() => link => {
   const props = {
     target: link.target,
     rel: link.rel,
   }
 
+
   // If route is string => it assumes string is route name => Create route object from route name
   // If route is not string => It assumes it's route object => returns passed route object
-  if (link.to) props.to = typeof link.to === 'string' ? { name: link.to } : link.to
-  else props.href = link.href
-
+  if (link.to)
+    props.to = typeof link.to === 'string' ? { name: link.to } : link.to
+  else
+    props.href = link.href
+  
   return props
 })
 
@@ -29,9 +32,11 @@ export const getComputedNavLinkToProp = computed(() => (link) => {
  // @param {Object, String} link navigation link object/string
  */
 export const resolveNavLinkRouteName = (link, router) => {
-  if (!link.to) return null
-  if (typeof link.to === 'string') return link.to
-
+  if (!link.to)
+    return null
+  if (typeof link.to === 'string')
+    return link.to
+  
   return router.resolve(link.to).name
 }
 
@@ -45,9 +50,10 @@ export const isNavLinkActive = (link, router) => {
 
   // Check if provided route matches route's matched route
   const resolveRoutedName = resolveNavLinkRouteName(link, router)
-  if (!resolveRoutedName) return false
-
-  return matchedRoutes.some((route) => {
+  if (!resolveRoutedName)
+    return false
+  
+  return matchedRoutes.some(route => {
     return route.name === resolveRoutedName || route.meta.navActiveLink === resolveRoutedName
   })
 }
@@ -56,22 +62,23 @@ export const isNavLinkActive = (link, router) => {
  * Check if nav group is active
  * @param {Array} children Group children
  */
-export const isNavGroupActive = (children, router) =>
-  children.some((child) => {
-    // If child have children => It's group => Go deeper(recursive)
-    if ('children' in child) return isNavGroupActive(child.children, router)
+export const isNavGroupActive = (children, router) => children.some(child => {
+  // If child have children => It's group => Go deeper(recursive)
+  if ('children' in child)
+    return isNavGroupActive(child.children, router)
 
-    // else it's link => Check for matched Route
-    return isNavLinkActive(child, router)
-  })
+  // else it's link => Check for matched Route
+  return isNavLinkActive(child, router)
+})
 
 /**
  * Change `dir` attribute based on direction
  * @param dir 'ltr' | 'rtl'
  */
-export const _setDirAttr = (dir) => {
+export const _setDirAttr = dir => {
   // Check if document exists for SSR
-  if (typeof document !== 'undefined') document.documentElement.setAttribute('dir', dir)
+  if (typeof document !== 'undefined')
+    document.documentElement.setAttribute('dir', dir)
 }
 
 /**
@@ -80,8 +87,9 @@ export const _setDirAttr = (dir) => {
  * @param tag tag to wrap the translation with
  */
 export const getDynamicI18nProps = (key, tag = 'span') => {
-  if (!layoutConfig.app.i18n.enable) return {}
-
+  if (!layoutConfig.app.i18n.enable)
+    return {}
+  
   return {
     keypath: key,
     tag,
@@ -107,37 +115,32 @@ export const switchToVerticalNavOnLtOverlayNavBreakpoint = () => {
       */
   const lgAndUpNav = ref(configStore.appContentLayoutNav)
 
+
   /*
         There might be case where we manually switch from vertical to horizontal nav and vice versa in `lgAndUp` screen
         So when user comes back from `mdAndDown` to `lgAndUp` we can set updated nav type
         For this we need to update the `lgAndUpNav` value if screen is `lgAndUp`
       */
-  watch(
-    () => configStore.appContentLayoutNav,
-    (value) => {
-      if (!configStore.isLessThanOverlayNavBreakpoint) lgAndUpNav.value = value
-    }
-  )
+  watch(() => configStore.appContentLayoutNav, value => {
+    if (!configStore.isLessThanOverlayNavBreakpoint)
+      lgAndUpNav.value = value
+  })
 
   /*
         This is layout switching part
         If it's `mdAndDown` => We will use vertical nav no matter what previous nav type was
         Or if it's `lgAndUp` we need to switch back to `lgAndUp` nav type. For this we will tracker property `lgAndUpNav`
       */
-  watch(
-    () => configStore.isLessThanOverlayNavBreakpoint,
-    (val) => {
-      configStore.appContentLayoutNav = val ? AppContentLayoutNav.Vertical : lgAndUpNav.value
-    },
-    { immediate: true }
-  )
+  watch(() => configStore.isLessThanOverlayNavBreakpoint, val => {
+    configStore.appContentLayoutNav = val ? AppContentLayoutNav.Vertical : lgAndUpNav.value
+  }, { immediate: true })
 }
 
 /**
  * Convert Hex color to rgb
  * @param hex
  */
-export const hexToRgb = (hex) => {
+export const hexToRgb = hex => {
   // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
 
@@ -146,23 +149,21 @@ export const hexToRgb = (hex) => {
   })
 
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-
-  return result
-    ? `${Number.parseInt(result[1], 16)},${Number.parseInt(result[2], 16)},${Number.parseInt(result[3], 16)}`
-    : null
+  
+  return result ? `${Number.parseInt(result[1], 16)},${Number.parseInt(result[2], 16)},${Number.parseInt(result[3], 16)}` : null
 }
 
 /**
  *RGBA color to Hex color with / without opacity
  */
 export const rgbaToHex = (rgba, forceRemoveAlpha = false) => {
-  return `#${rgba
+  return (`#${rgba
     .replace(/^rgba?\(|\s+|\)$/g, '') // Get's rgba / rgb string values
     .split(',') // splits them at ","
     .filter((string, index) => !forceRemoveAlpha || index !== 3)
-    .map((string) => Number.parseFloat(string)) // Converts them to numbers
+    .map(string => Number.parseFloat(string)) // Converts them to numbers
     .map((number, index) => (index === 3 ? Math.round(number * 255) : number)) // Converts alpha to 255 number
-    .map((number) => number.toString(16)) // Converts numbers to hex
-    .map((string) => (string.length === 1 ? `0${string}` : string)) // Adds 0 when length of one number is 1
-    .join('')}`
+    .map(number => number.toString(16)) // Converts numbers to hex
+    .map(string => (string.length === 1 ? `0${string}` : string)) // Adds 0 when length of one number is 1
+    .join('')}`)
 }

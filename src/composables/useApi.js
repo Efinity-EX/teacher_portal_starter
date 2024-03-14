@@ -18,7 +18,7 @@ export const useApi = createFetch({
           Authorization: `Bearer ${accessToken}`,
         }
       }
-
+      
       return { options }
     },
     afterFetch(ctx) {
@@ -28,10 +28,11 @@ export const useApi = createFetch({
       let parsedData = null
       try {
         parsedData = destr(data)
-      } catch (error) {
+      }
+      catch (error) {
         console.error(error)
       }
-
+      
       return { data: parsedData, response }
     },
   },
