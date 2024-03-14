@@ -1,20 +1,17 @@
 <script setup>
 const props = defineProps({
-  statusCode: {
-    type: [
-      String,
-      Number,
-    ],
-    required: false,
-  },
-  title: {
-    type: String,
-    required: false,
-  },
-  description: {
-    type: String,
-    required: false,
-  },
+    statusCode: {
+        type: [String, Number],
+        required: false,
+    },
+    title: {
+        type: String,
+        required: false,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
 })
 </script>
 
@@ -44,7 +41,7 @@ const props = defineProps({
 
 <style lang="scss" scoped>
 .header-title {
-  font-size: clamp(3rem, 5vw, 6rem);
-  line-height: clamp(3rem, 5vw, 6rem);
+    font-size: clamp(3rem, 5vw, 6rem);
+    line-height: clamp(3rem, 5vw, 6rem);
 }
 </style>

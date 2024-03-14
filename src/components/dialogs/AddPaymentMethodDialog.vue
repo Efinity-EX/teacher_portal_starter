@@ -11,10 +11,10 @@ import visaDark from '@images/icons/payments/img/visa-dark.png'
 import visaLight from '@images/icons/payments/img/visa-light.png'
 
 const props = defineProps({
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 const emit = defineEmits(['update:isDialogVisible'])
@@ -25,36 +25,36 @@ const americanEx = useGenerateImageVariant(americanExLight, americanExDark)
 const jcb = useGenerateImageVariant(jcbLight, jcbDark)
 const dc = useGenerateImageVariant(dcLight, dcDark)
 
-const dialogVisibleUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogVisibleUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 
 const paymentMethodsData = [
-  {
-    title: 'Visa',
-    type: 'Credit Card',
-    img: visa,
-  },
-  {
-    title: 'American Express',
-    type: 'Credit Card',
-    img: americanEx,
-  },
-  {
-    title: 'Mastercard',
-    type: 'Credit Card',
-    img: masterCard,
-  },
-  {
-    title: 'JCB',
-    type: 'Credit Card',
-    img: jcb,
-  },
-  {
-    title: 'Diners Club',
-    type: 'Credit Card',
-    img: dc,
-  },
+    {
+        title: 'Visa',
+        type: 'Credit Card',
+        img: visa,
+    },
+    {
+        title: 'American Express',
+        type: 'Credit Card',
+        img: americanEx,
+    },
+    {
+        title: 'Mastercard',
+        type: 'Credit Card',
+        img: masterCard,
+    },
+    {
+        title: 'JCB',
+        type: 'Credit Card',
+        img: jcb,
+    },
+    {
+        title: 'Diners Club',
+        type: 'Credit Card',
+        img: dc,
+    },
 ]
 </script>
 
@@ -106,12 +106,12 @@ const paymentMethodsData = [
 
 <style lang="scss">
 .refer-link-input {
-  .v-field--appended {
-    padding-inline-end: 0;
-  }
+    .v-field--appended {
+        padding-inline-end: 0;
+    }
 
-  .v-field__append-inner {
-    padding-block-start: 0.125rem;
-  }
+    .v-field__append-inner {
+        padding-block-start: 0.125rem;
+    }
 }
 </style>

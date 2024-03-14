@@ -13,13 +13,21 @@ import { themeConfig } from '@themeConfig'
 definePage({ meta: { layout: 'blank' } })
 
 const form = ref({
-  email: '',
-  password: '',
-  remember: false,
+    email: '',
+    password: '',
+    remember: false,
 })
 
 const isPasswordVisible = ref(false)
-const authThemeImg = useGenerateImageVariant(authV2LoginIllustrationLight, authV2LoginIllustrationDark, authV2LoginIllustrationBorderedLight, authV2LoginIllustrationBorderedDark, true)
+
+const authThemeImg = useGenerateImageVariant(
+    authV2LoginIllustrationLight,
+    authV2LoginIllustrationDark,
+    authV2LoginIllustrationBorderedLight,
+    authV2LoginIllustrationBorderedDark,
+    true
+)
+
 const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 </script>
 
@@ -44,7 +52,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
       <div class="position-relative bg-background w-100 me-0">
         <div
           class="d-flex align-center justify-center w-100 h-100"
-          style="padding-inline: 6.25rem;"
+          style="padding-inline: 6.25rem"
         >
           <VImg
             max-width="613"
@@ -75,7 +83,8 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
       >
         <VCardText>
           <h4 class="text-h4 mb-1">
-            Welcome to <span class="text-capitalize"> {{ themeConfig.app.title }} </span>! 👋🏻
+            Welcome to
+            <span class="text-capitalize"> {{ themeConfig.app.title }} </span>! 👋🏻
           </h4>
           <p class="mb-0">
             Please sign-in to your account and start the adventure
@@ -87,15 +96,17 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
             variant="tonal"
           >
             <p class="text-sm mb-2">
-              Admin Email: <strong>admin@demo.com</strong> / Pass: <strong>admin</strong>
+              Admin Email: <strong>admin@demo.com</strong> / Pass:
+              <strong>admin</strong>
             </p>
             <p class="text-sm mb-0">
-              Client Email: <strong>client@demo.com</strong> / Pass: <strong>client</strong>
+              Client Email: <strong>client@demo.com</strong> / Pass:
+              <strong>client</strong>
             </p>
           </VAlert>
         </VCardText>
         <VCardText>
-          <VForm @submit.prevent="() => { }">
+          <VForm @submit.prevent="() => {}">
             <VRow>
               <!-- email -->
               <VCol cols="12">
@@ -115,7 +126,9 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                   label="Password"
                   placeholder="············"
                   :type="isPasswordVisible ? 'text' : 'password'"
-                  :append-inner-icon="isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'"
+                  :append-inner-icon="
+                    isPasswordVisible ? 'tabler-eye-off' : 'tabler-eye'
+                  "
                   @click:append-inner="isPasswordVisible = !isPasswordVisible"
                 />
 
@@ -150,9 +163,7 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
                 <a
                   class="text-primary ms-2"
                   href="#"
-                >
-                  Create an account
-                </a>
+                > Create an account </a>
               </VCol>
               <VCol
                 cols="12"
@@ -179,5 +190,5 @@ const authThemeMask = useGenerateImageVariant(authV2MaskLight, authV2MaskDark)
 </template>
 
 <style lang="scss">
-@use "@core/scss/template/pages/page-auth.scss";
+@use '@core/scss/template/pages/page-auth.scss';
 </style>

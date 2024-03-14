@@ -1,22 +1,22 @@
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    required: false,
-    default: 'primary',
-  },
-  icon: {
-    type: String,
-    required: true,
-  },
-  stats: {
-    type: String,
-    required: true,
-  },
+    title: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: false,
+        default: 'primary',
+    },
+    icon: {
+        type: String,
+        required: true,
+    },
+    stats: {
+        type: String,
+        required: true,
+    },
 })
 </script>
 

@@ -2,32 +2,28 @@
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 import { VNodeRenderer } from './VNodeRenderer'
 import { layoutConfig } from '@layouts'
-import {
-  VerticalNavGroup,
-  VerticalNavLink,
-  VerticalNavSectionTitle,
-} from '@layouts/components'
+import { VerticalNavGroup, VerticalNavLink, VerticalNavSectionTitle } from '@layouts/components'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import { injectionKeyIsVerticalNavHovered } from '@layouts/symbols'
 
 const props = defineProps({
-  tag: {
-    type: null,
-    required: false,
-    default: 'aside',
-  },
-  navItems: {
-    type: null,
-    required: true,
-  },
-  isOverlayNavActive: {
-    type: Boolean,
-    required: true,
-  },
-  toggleIsOverlayNavActive: {
-    type: Function,
-    required: true,
-  },
+    tag: {
+        type: null,
+        required: false,
+        default: 'aside',
+    },
+    navItems: {
+        type: null,
+        required: true,
+    },
+    isOverlayNavActive: {
+        type: Boolean,
+        required: true,
+    },
+    toggleIsOverlayNavActive: {
+        type: Function,
+        required: true,
+    },
 })
 
 const refNav = ref()
@@ -37,13 +33,11 @@ provide(injectionKeyIsVerticalNavHovered, isHovered)
 
 const configStore = useLayoutConfigStore()
 
-const resolveNavItemComponent = item => {
-  if ('heading' in item)
-    return VerticalNavSectionTitle
-  if ('children' in item)
-    return VerticalNavGroup
-  
-  return VerticalNavLink
+const resolveNavItemComponent = (item) => {
+    if ('heading' in item) return VerticalNavSectionTitle
+    if ('children' in item) return VerticalNavGroup
+
+    return VerticalNavLink
 }
 
 /*ℹ️ Close overlay side when route is changed
@@ -51,15 +45,18 @@ Close overlay vertical nav when link is clicked
 */
 const route = useRoute()
 
-watch(() => route.name, () => {
-  props.toggleIsOverlayNavActive(false)
-})
+watch(
+    () => route.name,
+    () => {
+        props.toggleIsOverlayNavActive(false)
+    }
+)
 
 const isVerticalNavScrolled = ref(false)
-const updateIsVerticalNavScrolled = val => isVerticalNavScrolled.value = val
+const updateIsVerticalNavScrolled = (val) => (isVerticalNavScrolled.value = val)
 
-const handleNavScroll = evt => {
-  isVerticalNavScrolled.value = evt.target.scrollTop > 0
+const handleNavScroll = (evt) => {
+    isVerticalNavScrolled.value = evt.target.scrollTop > 0
 }
 
 const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
@@ -73,9 +70,9 @@ const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
     :class="[
       {
         'overlay-nav': configStore.isLessThanOverlayNavBreakpoint,
-        'hovered': isHovered,
-        'visible': isOverlayNavActive,
-        'scrolled': isVerticalNavScrolled,
+        hovered: isHovered,
+        visible: isOverlayNavActive,
+        scrolled: isVerticalNavScrolled,
       },
     ]"
   >
@@ -105,7 +102,9 @@ const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
           class="header-action d-none nav-unpin"
           :class="configStore.isVerticalNavCollapsed && 'd-lg-block'"
           v-bind="layoutConfig.icons.verticalNavUnPinned"
-          @click="configStore.isVerticalNavCollapsed = !configStore.isVerticalNavCollapsed"
+          @click="
+            configStore.isVerticalNavCollapsed = !configStore.isVerticalNavCollapsed
+          "
         />
         <Component
           :is="layoutConfig.app.iconRenderer || 'div'"
@@ -113,7 +112,9 @@ const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
           class="header-action d-none nav-pin"
           :class="!configStore.isVerticalNavCollapsed && 'd-lg-block'"
           v-bind="layoutConfig.icons.verticalNavPinned"
-          @click="configStore.isVerticalNavCollapsed = !configStore.isVerticalNavCollapsed"
+          @click="
+            configStore.isVerticalNavCollapsed = !configStore.isVerticalNavCollapsed
+          "
         />
         <Component
           :is="layoutConfig.app.iconRenderer || 'div'"
@@ -150,96 +151,98 @@ const hideTitleAndIcon = configStore.isVerticalNavMini(isHovered)
 
 <style lang="scss" scoped>
 .app-logo {
-  display: flex;
-  align-items: center;
-  column-gap: 0.75rem;
+    display: flex;
+    align-items: center;
+    column-gap: 0.75rem;
 
-  .app-logo-title {
-    font-size: 1.375rem;
-    font-weight: 700;
-    letter-spacing: 0.25px;
-    line-height: 1.5rem;
-    text-transform: capitalize;
-  }
+    .app-logo-title {
+        font-size: 1.375rem;
+        font-weight: 700;
+        letter-spacing: 0.25px;
+        line-height: 1.5rem;
+        text-transform: capitalize;
+    }
 }
 </style>
 
 <style lang="scss">
-@use "@configured-variables" as variables;
-@use "@layouts/styles/mixins";
+@use '@configured-variables' as variables;
+@use '@layouts/styles/mixins';
 
 // 👉 Vertical Nav
 .layout-vertical-nav {
-  position: fixed;
-  z-index: variables.$layout-vertical-nav-z-index;
-  display: flex;
-  flex-direction: column;
-  block-size: 100%;
-  inline-size: variables.$layout-vertical-nav-width;
-  inset-block-start: 0;
-  inset-inline-start: 0;
-  transition: inline-size 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-  will-change: transform, inline-size;
-
-  .nav-header {
+    position: fixed;
+    z-index: variables.$layout-vertical-nav-z-index;
     display: flex;
-    align-items: center;
-
-    .header-action {
-      cursor: pointer;
-
-      @at-root {
-        #{variables.$selector-vertical-nav-mini} .nav-header .header-action {
-          &.nav-pin,
-          &.nav-unpin {
-            display: none !important;
-          }
-        }
-      }
-    }
-  }
-
-  .app-title-wrapper {
-    margin-inline-end: auto;
-  }
-
-  .nav-items {
+    flex-direction: column;
     block-size: 100%;
+    inline-size: variables.$layout-vertical-nav-width;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    transition:
+        inline-size 0.25s ease-in-out,
+        box-shadow 0.25s ease-in-out;
+    will-change: transform, inline-size;
 
-    // ℹ️ We no loner needs this overflow styles as perfect scrollbar applies it
-    // overflow-x: hidden;
+    .nav-header {
+        display: flex;
+        align-items: center;
 
-    // // ℹ️ We used `overflow-y` instead of `overflow` to mitigate overflow x. Revert back if any issue found.
-    // overflow-y: auto;
-  }
+        .header-action {
+            cursor: pointer;
 
-  .nav-item-title {
-    overflow: hidden;
-    margin-inline-end: auto;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  // 👉 Collapsed
-  .layout-vertical-nav-collapsed & {
-    &:not(.hovered) {
-      inline-size: variables.$layout-vertical-nav-collapsed-width;
+            @at-root {
+                #{variables.$selector-vertical-nav-mini} .nav-header .header-action {
+                    &.nav-pin,
+                    &.nav-unpin {
+                        display: none !important;
+                    }
+                }
+            }
+        }
     }
-  }
+
+    .app-title-wrapper {
+        margin-inline-end: auto;
+    }
+
+    .nav-items {
+        block-size: 100%;
+
+        // ℹ️ We no loner needs this overflow styles as perfect scrollbar applies it
+        // overflow-x: hidden;
+
+        // // ℹ️ We used `overflow-y` instead of `overflow` to mitigate overflow x. Revert back if any issue found.
+        // overflow-y: auto;
+    }
+
+    .nav-item-title {
+        overflow: hidden;
+        margin-inline-end: auto;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    // 👉 Collapsed
+    .layout-vertical-nav-collapsed & {
+        &:not(.hovered) {
+            inline-size: variables.$layout-vertical-nav-collapsed-width;
+        }
+    }
 }
 
 // Small screen vertical nav transition
 @media (max-width: 1279px) {
-  .layout-vertical-nav {
-    &:not(.visible) {
-      transform: translateX(-#{variables.$layout-vertical-nav-width});
+    .layout-vertical-nav {
+        &:not(.visible) {
+            transform: translateX(-#{variables.$layout-vertical-nav-width});
 
-      @include mixins.rtl {
-        transform: translateX(variables.$layout-vertical-nav-width);
-      }
+            @include mixins.rtl {
+                transform: translateX(variables.$layout-vertical-nav-width);
+            }
+        }
+
+        transition: transform 0.25s ease-in-out;
     }
-
-    transition: transform 0.25s ease-in-out;
-  }
 }
 </style>

@@ -3,45 +3,45 @@ import { getHighlighter } from 'shikiji'
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  code: {
-    type: Object,
-    required: true,
-  },
-  codeLanguage: {
-    type: String,
-    required: false,
-    default: 'markup',
-  },
-  noPadding: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+    title: {
+        type: String,
+        required: true,
+    },
+    code: {
+        type: Object,
+        required: true,
+    },
+    codeLanguage: {
+        type: String,
+        required: false,
+        default: 'markup',
+    },
+    noPadding: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 })
 
 const preferredCodeLanguage = useCookie('preferredCodeLanguage', {
-  default: () => 'ts',
-  maxAge: COOKIE_MAX_AGE_1_YEAR,
+    default: () => 'ts',
+    maxAge: COOKIE_MAX_AGE_1_YEAR,
 })
 
 const isCodeShown = ref(false)
-const { copy, copied } = useClipboard({ source: computed(() => props.code[preferredCodeLanguage.value]) })
+
+const { copy, copied } = useClipboard({
+    source: computed(() => props.code[preferredCodeLanguage.value]),
+})
 
 const highlighter = await getHighlighter({
-  themes: [
-    'dracula',
-    'dracula-soft',
-  ],
-  langs: ['vue'],
+    themes: ['dracula', 'dracula-soft'],
+    langs: ['vue'],
 })
 
 const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.value], {
-  lang: 'vue',
-  theme: 'dracula',
+    lang: 'vue',
+    theme: 'dracula',
 })
 </script>
 
@@ -87,7 +87,9 @@ const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.valu
               >
                 <VIcon
                   icon="mdi-language-typescript"
-                  :color="preferredCodeLanguage === 'ts' ? 'primary' : 'secondary'"
+                  :color="
+                    preferredCodeLanguage === 'ts' ? 'primary' : 'secondary'
+                  "
                 />
               </VBtn>
 
@@ -99,7 +101,9 @@ const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.valu
               >
                 <VIcon
                   icon="mdi-language-javascript"
-                  :color="preferredCodeLanguage === 'js' ? 'primary' : 'secondary'"
+                  :color="
+                    preferredCodeLanguage === 'js' ? 'primary' : 'secondary'
+                  "
                 />
               </VBtn>
             </VBtnToggle>
@@ -107,7 +111,7 @@ const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.valu
 
           <div class="position-relative">
             <PerfectScrollbar
-              style="border-radius: 6px;max-block-size: 500px;"
+              style="border-radius: 6px; max-block-size: 500px"
               :options="{ wheelPropagation: false, suppressScrollX: false }"
             >
               <!-- eslint-disable-next-line vue/no-v-html -->
@@ -116,7 +120,11 @@ const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.valu
             <IconBtn
               class="position-absolute app-card-code-copy-icon"
               color="white"
-              @click="() => { copy() }"
+              @click="
+                () => {
+                  copy()
+                }
+              "
             >
               <VIcon
                 :icon="copied ? 'tabler-check' : 'tabler-copy'"
@@ -131,29 +139,30 @@ const codeSnippet = highlighter.codeToHtml(props.code[preferredCodeLanguage.valu
 </template>
 
 <style lang="scss">
-@use "@styles/variables/vuetify.scss";
+@use '@styles/variables/vuetify.scss';
 
-code[class*="language-"],
-pre[class*="language-"] {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  font-size: 14px;
+code[class*='language-'],
+pre[class*='language-'] {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+        'Courier New', monospace;
+    font-size: 14px;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-  border-radius: vuetify.$card-border-radius;
-  max-block-size: 500px;
+:not(pre) > code[class*='language-'],
+pre[class*='language-'] {
+    border-radius: vuetify.$card-border-radius;
+    max-block-size: 500px;
 }
 
 .app-card-code-copy-icon {
-  inset-block-start: 1.2em;
-  inset-inline-end: 0.8em;
+    inset-block-start: 1.2em;
+    inset-inline-end: 0.8em;
 }
 
 .app-card-code {
-  .shiki {
-    padding: 0.75rem;
-    text-wrap: wrap;
-  }
+    .shiki {
+        padding: 0.75rem;
+        text-wrap: wrap;
+    }
 }
 </style>

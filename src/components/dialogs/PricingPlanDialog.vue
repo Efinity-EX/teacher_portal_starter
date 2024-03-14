@@ -1,15 +1,15 @@
 <script setup>
 const props = defineProps({
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 const emit = defineEmits(['update:isDialogVisible'])
 
-const dialogVisibleUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogVisibleUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 </script>
 

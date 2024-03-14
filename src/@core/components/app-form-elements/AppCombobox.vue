@@ -1,14 +1,16 @@
 <script setup>
 defineOptions({
-  name: 'AppCombobox',
-  inheritAttrs: false,
+    name: 'AppCombobox',
+    inheritAttrs: false,
 })
 
 const elementId = computed(() => {
-  const attrs = useAttrs()
-  const _elementIdToken = attrs.id || attrs.label
-  
-  return _elementIdToken ? `app-combobox-${ _elementIdToken }-${ Math.random().toString(36).slice(2, 7) }` : undefined
+    const attrs = useAttrs()
+    const _elementIdToken = attrs.id || attrs.label
+
+    return _elementIdToken
+        ? `app-combobox-${_elementIdToken}-${Math.random().toString(36).slice(2, 7)}`
+        : undefined
 })
 
 const label = computed(() => useAttrs().label)

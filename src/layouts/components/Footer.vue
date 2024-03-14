@@ -11,7 +11,8 @@
         size="1.25rem"
         class="mx-1"
       />
-      By <a
+      By
+      <a
         href="https://pixinvent.com"
         target="_blank"
         rel="noopener noreferrer"

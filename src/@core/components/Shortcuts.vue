@@ -2,15 +2,15 @@
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 
 const props = defineProps({
-  togglerIcon: {
-    type: String,
-    required: false,
-    default: 'tabler-layout-grid-add',
-  },
-  shortcuts: {
-    type: Array,
-    required: true,
-  },
+    togglerIcon: {
+        type: String,
+        required: false,
+        default: 'tabler-layout-grid-add',
+    },
+    shortcuts: {
+        type: Array,
+        required: true,
+    },
 })
 
 const router = useRouter()
@@ -90,6 +90,6 @@ const router = useRouter()
 
 <style lang="scss">
 .shortcut-icon:hover {
-  background-color: rgba(var(--v-theme-on-surface), var(--v-hover-opacity));
+    background-color: rgba(var(--v-theme-on-surface), var(--v-hover-opacity));
 }
 </style>

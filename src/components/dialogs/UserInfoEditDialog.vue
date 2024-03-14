@@ -1,58 +1,55 @@
 <script setup>
 const props = defineProps({
-  userData: {
-    type: Object,
-    required: false,
-    default: () => ({
-      id: 0,
-      fullName: '',
-      firstName: '',
-      lastName: '',
-      company: '',
-      role: '',
-      username: '',
-      country: '',
-      contact: '',
-      email: '',
-      currentPlan: '',
-      status: '',
-      avatar: '',
-      taskDone: null,
-      projectDone: null,
-      taxId: '',
-      language: '',
-    }),
-  },
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    userData: {
+        type: Object,
+        required: false,
+        default: () => ({
+            id: 0,
+            fullName: '',
+            firstName: '',
+            lastName: '',
+            company: '',
+            role: '',
+            username: '',
+            country: '',
+            contact: '',
+            email: '',
+            currentPlan: '',
+            status: '',
+            avatar: '',
+            taskDone: null,
+            projectDone: null,
+            taxId: '',
+            language: '',
+        }),
+    },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
-const emit = defineEmits([
-  'submit',
-  'update:isDialogVisible',
-])
+const emit = defineEmits(['submit', 'update:isDialogVisible'])
 
 const userData = ref(structuredClone(toRaw(props.userData)))
 const isUseAsBillingAddress = ref(false)
 
 watch(props, () => {
-  userData.value = structuredClone(toRaw(props.userData))
+    userData.value = structuredClone(toRaw(props.userData))
 })
 
 const onFormSubmit = () => {
-  emit('update:isDialogVisible', false)
-  emit('submit', userData.value)
+    emit('update:isDialogVisible', false)
+    emit('submit', userData.value)
 }
 
 const onFormReset = () => {
-  userData.value = structuredClone(toRaw(props.userData))
-  emit('update:isDialogVisible', false)
+    userData.value = structuredClone(toRaw(props.userData))
+    emit('update:isDialogVisible', false)
 }
 
-const dialogModelValueUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogModelValueUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 </script>
 

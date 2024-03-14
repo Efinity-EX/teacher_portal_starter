@@ -2,25 +2,29 @@
 import { useConfigStore } from '@core/stores/config'
 
 const props = defineProps({
-  themes: {
-    type: Array,
-    required: true,
-  },
+    themes: {
+        type: Array,
+        required: true,
+    },
 })
 
 const configStore = useConfigStore()
 const selectedItem = ref([configStore.theme])
 
 // Update icon if theme is changed from other sources
-watch(() => configStore.theme, () => {
-  selectedItem.value = [configStore.theme]
-}, { deep: true })
+watch(
+    () => configStore.theme,
+    () => {
+        selectedItem.value = [configStore.theme]
+    },
+    { deep: true }
+)
 </script>
 
 <template>
   <IconBtn color="rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))">
     <VIcon
-      :icon="props.themes.find(t => t.name === configStore.theme)?.icon"
+      :icon="props.themes.find((t) => t.name === configStore.theme)?.icon"
       size="24"
     />
 
@@ -48,7 +52,11 @@ watch(() => configStore.theme, () => {
           :prepend-icon="icon"
           color="primary"
           class="text-capitalize"
-          @click="() => { configStore.theme = name }"
+          @click="
+            () => {
+              configStore.theme = name
+            }
+          "
         >
           {{ name }}
         </VListItem>

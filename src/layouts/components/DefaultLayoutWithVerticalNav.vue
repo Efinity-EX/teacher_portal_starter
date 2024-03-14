@@ -15,15 +15,16 @@ import { VerticalNavLayout } from '@layouts'
 const isFallbackStateActive = ref(false)
 const refLoadingIndicator = ref(null)
 
-watch([
-  isFallbackStateActive,
-  refLoadingIndicator,
-], () => {
-  if (isFallbackStateActive.value && refLoadingIndicator.value)
-    refLoadingIndicator.value.fallbackHandle()
-  if (!isFallbackStateActive.value && refLoadingIndicator.value)
-    refLoadingIndicator.value.resolveHandle()
-}, { immediate: true })
+watch(
+    [isFallbackStateActive, refLoadingIndicator],
+    () => {
+        if (isFallbackStateActive.value && refLoadingIndicator.value)
+            refLoadingIndicator.value.fallbackHandle()
+        if (!isFallbackStateActive.value && refLoadingIndicator.value)
+            refLoadingIndicator.value.resolveHandle()
+    },
+    { immediate: true }
+)
 // !SECTION
 </script>
 

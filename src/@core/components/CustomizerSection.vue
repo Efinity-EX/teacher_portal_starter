@@ -1,14 +1,14 @@
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  divider: {
-    type: Boolean,
-    required: false,
-    default: true,
-  },
+    title: {
+        type: String,
+        required: true,
+    },
+    divider: {
+        type: Boolean,
+        required: false,
+        default: true,
+    },
 })
 </script>
 

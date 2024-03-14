@@ -2,33 +2,30 @@
 import themeselectionQr from '@images/pages/themeselection-qr.png'
 
 const props = defineProps({
-  authCode: {
-    type: String,
-    required: false,
-  },
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    authCode: {
+        type: String,
+        required: false,
+    },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
-const emit = defineEmits([
-  'update:isDialogVisible',
-  'submit',
-])
+const emit = defineEmits(['update:isDialogVisible', 'submit'])
 
 const authCode = ref(structuredClone(toRaw(props.authCode)))
 
 const formSubmit = () => {
-  if (authCode.value) {
-    emit('submit', authCode.value)
-    emit('update:isDialogVisible', false)
-  }
+    if (authCode.value) {
+        emit('submit', authCode.value)
+        emit('update:isDialogVisible', false)
+    }
 }
 
 const resetAuthCode = () => {
-  authCode.value = structuredClone(toRaw(props.authCode))
-  emit('update:isDialogVisible', false)
+    authCode.value = structuredClone(toRaw(props.authCode))
+    emit('update:isDialogVisible', false)
 }
 </script>
 
@@ -52,7 +49,9 @@ const resetAuthCode = () => {
         </h5>
 
         <p class="text-body-1 mb-6">
-          Using an authenticator app like Google Authenticator, Microsoft Authenticator, Authy, or 1Password, scan the QR code. It will generate a 6 digit code for you to enter below.
+          Using an authenticator app like Google Authenticator, Microsoft Authenticator,
+          Authy, or 1Password, scan the QR code. It will generate a 6 digit code for you
+          to enter below.
         </p>
 
         <div class="mb-6">

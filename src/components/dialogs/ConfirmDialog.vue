@@ -1,53 +1,50 @@
 <script setup>
 const props = defineProps({
-  confirmationQuestion: {
-    type: String,
-    required: true,
-  },
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
-  confirmTitle: {
-    type: String,
-    required: true,
-  },
-  confirmMsg: {
-    type: String,
-    required: true,
-  },
-  cancelTitle: {
-    type: String,
-    required: true,
-  },
-  cancelMsg: {
-    type: String,
-    required: true,
-  },
+    confirmationQuestion: {
+        type: String,
+        required: true,
+    },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
+    confirmTitle: {
+        type: String,
+        required: true,
+    },
+    confirmMsg: {
+        type: String,
+        required: true,
+    },
+    cancelTitle: {
+        type: String,
+        required: true,
+    },
+    cancelMsg: {
+        type: String,
+        required: true,
+    },
 })
 
-const emit = defineEmits([
-  'update:isDialogVisible',
-  'confirm',
-])
+const emit = defineEmits(['update:isDialogVisible', 'confirm'])
 
 const unsubscribed = ref(false)
 const cancelled = ref(false)
 
-const updateModelValue = val => {
-  emit('update:isDialogVisible', val)
+const updateModelValue = (val) => {
+    emit('update:isDialogVisible', val)
 }
 
 const onConfirmation = () => {
-  emit('confirm', true)
-  updateModelValue(false)
-  unsubscribed.value = true
+    emit('confirm', true)
+    updateModelValue(false)
+    unsubscribed.value = true
 }
 
 const onCancel = () => {
-  emit('confirm', false)
-  emit('update:isDialogVisible', false)
-  cancelled.value = true
+    emit('confirm', false)
+    emit('update:isDialogVisible', false)
+    cancelled.value = true
 }
 </script>
 
@@ -65,7 +62,7 @@ const onCancel = () => {
           variant="outlined"
           color="warning"
           class="my-4"
-          style=" block-size: 88px;inline-size: 88px; pointer-events: none;"
+          style="block-size: 88px; inline-size: 88px; pointer-events: none"
         >
           <span class="text-5xl">!</span>
         </VBtn>
@@ -106,7 +103,7 @@ const onCancel = () => {
           variant="outlined"
           color="success"
           class="my-4"
-          style=" block-size: 88px;inline-size: 88px; pointer-events: none;"
+          style="block-size: 88px; inline-size: 88px; pointer-events: none"
         >
           <VIcon
             icon="tabler-check"
@@ -142,7 +139,7 @@ const onCancel = () => {
           variant="outlined"
           color="error"
           class="my-4"
-          style=" block-size: 88px;inline-size: 88px; pointer-events: none;"
+          style="block-size: 88px; inline-size: 88px; pointer-events: none"
         >
           <span class="text-5xl font-weight-light">X</span>
         </VBtn>

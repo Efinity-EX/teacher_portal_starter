@@ -9,67 +9,67 @@ import avatar7 from '@images/avatars/avatar-7.png'
 import avatar8 from '@images/avatars/avatar-8.png'
 
 const props = defineProps({
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 const emit = defineEmits(['update:isDialogVisible'])
 
-const dialogVisibleUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogVisibleUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 
 const membersList = [
-  {
-    avatar: avatar1,
-    name: 'Lester Palmer',
-    email: 'jerrod98@gmail.com',
-    permission: 'Can Edit',
-  },
-  {
-    avatar: avatar2,
-    name: 'Mattie Blair',
-    email: 'prudence.boehm@yahoo.com',
-    permission: 'Owner',
-  },
-  {
-    avatar: avatar3,
-    name: 'Marvin Wheeler',
-    email: 'rumet@jujpejah.net',
-    permission: 'Can Comment',
-  },
-  {
-    avatar: avatar4,
-    name: 'Nannie Ford',
-    email: 'negza@nuv.io',
-    permission: 'Can View',
-  },
-  {
-    avatar: avatar5,
-    name: 'Julian Murphy',
-    email: 'lunebame@umdomgu.net',
-    permission: 'Can Edit',
-  },
-  {
-    avatar: avatar6,
-    name: 'Sophie Gilbert',
-    email: 'ha@sugit.gov',
-    permission: 'Can View',
-  },
-  {
-    avatar: avatar7,
-    name: 'Chris Watkins',
-    email: 'zokap@mak.org',
-    permission: 'Can Comment',
-  },
-  {
-    avatar: avatar8,
-    name: 'Adelaide Nichols',
-    email: 'ujinomu@jigo.com',
-    permission: 'Can Edit',
-  },
+    {
+        avatar: avatar1,
+        name: 'Lester Palmer',
+        email: 'jerrod98@gmail.com',
+        permission: 'Can Edit',
+    },
+    {
+        avatar: avatar2,
+        name: 'Mattie Blair',
+        email: 'prudence.boehm@yahoo.com',
+        permission: 'Owner',
+    },
+    {
+        avatar: avatar3,
+        name: 'Marvin Wheeler',
+        email: 'rumet@jujpejah.net',
+        permission: 'Can Comment',
+    },
+    {
+        avatar: avatar4,
+        name: 'Nannie Ford',
+        email: 'negza@nuv.io',
+        permission: 'Can View',
+    },
+    {
+        avatar: avatar5,
+        name: 'Julian Murphy',
+        email: 'lunebame@umdomgu.net',
+        permission: 'Can Edit',
+    },
+    {
+        avatar: avatar6,
+        name: 'Sophie Gilbert',
+        email: 'ha@sugit.gov',
+        permission: 'Can View',
+    },
+    {
+        avatar: avatar7,
+        name: 'Chris Watkins',
+        email: 'zokap@mak.org',
+        permission: 'Can Comment',
+    },
+    {
+        avatar: avatar8,
+        name: 'Adelaide Nichols',
+        email: 'ujinomu@jigo.com',
+        permission: 'Can Edit',
+    },
 ]
 </script>
 
@@ -142,7 +142,12 @@ const membersList = [
                 <VMenu activator="parent">
                   <VList :selected="[member.permission]">
                     <VListItem
-                      v-for="(item, index) in ['Owner', 'Can Edit', 'Can Comment', 'Can View']"
+                      v-for="(item, index) in [
+                        'Owner',
+                        'Can Edit',
+                        'Can Comment',
+                        'Can View',
+                      ]"
                       :key="index"
                       :value="item"
                     >
@@ -179,8 +184,8 @@ const membersList = [
 
 <style lang="scss">
 .share-project-dialog {
-  .card-list {
-    --v-card-list-gap: 1rem;
-  }
+    .card-list {
+        --v-card-list-gap: 1rem;
+    }
 }
 </style>

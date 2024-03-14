@@ -1,34 +1,34 @@
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  color: {
-    type: String,
-    required: false,
-    default: 'primary',
-  },
-  icon: {
-    type: String,
-    required: true,
-  },
-  stats: {
-    type: String,
-    required: true,
-  },
-  height: {
-    type: Number,
-    required: true,
-  },
-  series: {
-    type: Array,
-    required: true,
-  },
-  chartOptions: {
-    type: null,
-    required: true,
-  },
+    title: {
+        type: String,
+        required: true,
+    },
+    color: {
+        type: String,
+        required: false,
+        default: 'primary',
+    },
+    icon: {
+        type: String,
+        required: true,
+    },
+    stats: {
+        type: String,
+        required: true,
+    },
+    height: {
+        type: Number,
+        required: true,
+    },
+    series: {
+        type: Array,
+        required: true,
+    },
+    chartOptions: {
+        type: null,
+        required: true,
+    },
 })
 </script>
 

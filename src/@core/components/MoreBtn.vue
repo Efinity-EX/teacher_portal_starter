@@ -1,13 +1,13 @@
 <script setup>
 const props = defineProps({
-  menuList: {
-    type: Array,
-    required: false,
-  },
-  itemProps: {
-    type: Boolean,
-    required: false,
-  },
+    menuList: {
+        type: Array,
+        required: false,
+    },
+    itemProps: {
+        type: Boolean,
+        required: false,
+    },
 })
 </script>
 

@@ -1,36 +1,33 @@
 <script setup>
 const props = defineProps({
-  mobileNumber: {
-    type: String,
-    required: false,
-  },
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    mobileNumber: {
+        type: String,
+        required: false,
+    },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
-const emit = defineEmits([
-  'update:isDialogVisible',
-  'submit',
-])
+const emit = defineEmits(['update:isDialogVisible', 'submit'])
 
 const phoneNumber = ref(structuredClone(toRaw(props.mobileNumber)))
 
 const formSubmit = () => {
-  if (phoneNumber.value) {
-    emit('submit', phoneNumber.value)
-    emit('update:isDialogVisible', false)
-  }
+    if (phoneNumber.value) {
+        emit('submit', phoneNumber.value)
+        emit('update:isDialogVisible', false)
+    }
 }
 
 const resetPhoneNumber = () => {
-  phoneNumber.value = structuredClone(toRaw(props.mobileNumber))
-  emit('update:isDialogVisible', false)
+    phoneNumber.value = structuredClone(toRaw(props.mobileNumber))
+    emit('update:isDialogVisible', false)
 }
 
-const dialogModelValueUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogModelValueUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 </script>
 
@@ -50,7 +47,8 @@ const dialogModelValueUpdate = val => {
           Verify Your Mobile Number for SMS
         </h5>
         <p class="text-body-1 mb-6">
-          Enter your mobile phone number with country code and  we will send you a verification code.
+          Enter your mobile phone number with country code and we will send you a
+          verification code.
         </p>
 
         <VForm @submit.prevent="() => {}">

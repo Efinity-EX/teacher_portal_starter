@@ -3,20 +3,17 @@ import { Placeholder } from '@tiptap/extension-placeholder'
 import { TextAlign } from '@tiptap/extension-text-align'
 import { Underline } from '@tiptap/extension-underline'
 import { StarterKit } from '@tiptap/starter-kit'
-import {
-  EditorContent,
-  useEditor,
-} from '@tiptap/vue-3'
+import { EditorContent, useEditor } from '@tiptap/vue-3'
 
 const props = defineProps({
-  modelValue: {
-    type: String,
-    required: true,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-  },
+    modelValue: {
+        type: String,
+        required: true,
+    },
+    placeholder: {
+        type: String,
+        required: false,
+    },
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -24,31 +21,29 @@ const emit = defineEmits(['update:modelValue'])
 const editorRef = ref()
 
 const editor = useEditor({
-  content: props.modelValue,
-  extensions: [
-    StarterKit,
-    TextAlign.configure({
-      types: [
-        'heading',
-        'paragraph',
-      ],
-    }),
-    Placeholder.configure({ placeholder: props.placeholder ?? 'Write something here...' }),
-    Underline,
-  ],
-  onUpdate() {
-    if (!editor.value)
-      return
-    emit('update:modelValue', editor.value.getHTML())
-  },
+    content: props.modelValue,
+    extensions: [
+        StarterKit,
+        TextAlign.configure({
+            types: ['heading', 'paragraph'],
+        }),
+        Placeholder.configure({ placeholder: props.placeholder ?? 'Write something here...' }),
+        Underline,
+    ],
+    onUpdate() {
+        if (!editor.value) return
+        emit('update:modelValue', editor.value.getHTML())
+    },
 })
 
-watch(() => props.modelValue, () => {
-  const isSame = editor.value?.getHTML() === props.modelValue
-  if (isSame)
-    return
-  editor.value?.commands.setContent(props.modelValue)
-})
+watch(
+    () => props.modelValue,
+    () => {
+        const isSame = editor.value?.getHTML() === props.modelValue
+        if (isSame) return
+        editor.value?.commands.setContent(props.modelValue)
+    }
+)
 </script>
 
 <template>
@@ -179,25 +174,25 @@ watch(() => props.modelValue, () => {
 
 <style lang="scss">
 .productDescriptionEditor {
-  .ProseMirror {
-    padding: 0 !important;
-    min-block-size: 12vh;
+    .ProseMirror {
+        padding: 0 !important;
+        min-block-size: 12vh;
 
-    p {
-      margin-block-end: 0;
-    }
+        p {
+            margin-block-end: 0;
+        }
 
-    p.is-editor-empty:first-child::before {
-      block-size: 0;
-      color: #adb5bd;
-      content: attr(data-placeholder);
-      float: inline-start;
-      pointer-events: none;
-    }
+        p.is-editor-empty:first-child::before {
+            block-size: 0;
+            color: #adb5bd;
+            content: attr(data-placeholder);
+            float: inline-start;
+            pointer-events: none;
+        }
 
-    &-focused {
-      outline: none;
+        &-focused {
+            outline: none;
+        }
     }
-  }
 }
 </style>

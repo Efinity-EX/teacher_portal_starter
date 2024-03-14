@@ -1,35 +1,29 @@
 <script setup>
 import { layoutConfig } from '@layouts'
-import {
-  HorizontalNavLink,
-  HorizontalNavPopper,
-} from '@layouts/components'
+import { HorizontalNavLink, HorizontalNavPopper } from '@layouts/components'
 import { canViewNavMenuGroup } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
-import {
-  getDynamicI18nProps,
-  isNavGroupActive,
-} from '@layouts/utils'
+import { getDynamicI18nProps, isNavGroupActive } from '@layouts/utils'
 
 const props = defineProps({
-  item: {
-    type: null,
-    required: true,
-  },
-  childrenAtEnd: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
-  isSubItem: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+    item: {
+        type: null,
+        required: true,
+    },
+    childrenAtEnd: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
+    isSubItem: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 })
 
 defineOptions({
-  name: 'HorizontalNavGroup',
+    name: 'HorizontalNavGroup',
 })
 
 const route = useRoute()
@@ -41,11 +35,15 @@ const isGroupActive = ref(false)
 
 updates isActive & isOpen based on active state of group.
 */
-watch(() => route.path, () => {
-  const isActive = isNavGroupActive(props.item.children, router)
+watch(
+    () => route.path,
+    () => {
+        const isActive = isNavGroupActive(props.item.children, router)
 
-  isGroupActive.value = isActive
-}, { immediate: true })
+        isGroupActive.value = isActive
+    },
+    { immediate: true }
+)
 </script>
 
 <template>
@@ -55,12 +53,14 @@ watch(() => route.path, () => {
     class="nav-group"
     tag="li"
     content-container-tag="ul"
-    :class="[{
-      'active': isGroupActive,
-      'children-at-end': childrenAtEnd,
-      'sub-item': isSubItem,
-      'disabled': item.disable,
-    }]"
+    :class="[
+      {
+        active: isGroupActive,
+        'children-at-end': childrenAtEnd,
+        'sub-item': isSubItem,
+        disabled: item.disable,
+      },
+    ]"
     :popper-inline-end="childrenAtEnd"
   >
     <div class="nav-group-label">
@@ -98,20 +98,20 @@ watch(() => route.path, () => {
 
 <style lang="scss">
 .layout-horizontal-nav {
-  .nav-group {
-    .nav-group-label {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-    }
+    .nav-group {
+        .nav-group-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
 
-    .popper-content {
-      z-index: 1;
+        .popper-content {
+            z-index: 1;
 
-      > div {
-        overflow: hidden auto;
-      }
+            > div {
+                overflow: hidden auto;
+            }
+        }
     }
-  }
 }
 </style>

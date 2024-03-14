@@ -1,14 +1,16 @@
 <script setup>
 defineOptions({
-  name: 'AppSelect',
-  inheritAttrs: false,
+    name: 'AppSelect',
+    inheritAttrs: false,
 })
 
 const elementId = computed(() => {
-  const attrs = useAttrs()
-  const _elementIdToken = attrs.id || attrs.label
-  
-  return _elementIdToken ? `app-select-${ _elementIdToken }-${ Math.random().toString(36).slice(2, 7) }` : undefined
+    const attrs = useAttrs()
+    const _elementIdToken = attrs.id || attrs.label
+
+    return _elementIdToken
+        ? `app-select-${_elementIdToken}-${Math.random().toString(36).slice(2, 7)}`
+        : undefined
 })
 
 const label = computed(() => useAttrs().label)
@@ -23,7 +25,7 @@ const label = computed(() => useAttrs().label)
       v-if="label"
       :for="elementId"
       class="mb-1 text-body-2"
-      style="line-height: 15px;"
+      style="line-height: 15px"
       :text="label"
     />
     <VSelect
@@ -33,7 +35,14 @@ const label = computed(() => useAttrs().label)
         label: undefined,
         variant: 'outlined',
         id: elementId,
-        menuProps: { contentClass: ['app-inner-list', 'app-select__content', 'v-select__content', $attrs.multiple !== undefined ? 'v-list-select-multiple' : ''] },
+        menuProps: {
+          contentClass: [
+            'app-inner-list',
+            'app-select__content',
+            'v-select__content',
+            $attrs.multiple !== undefined ? 'v-list-select-multiple' : '',
+          ],
+        },
       }"
     >
       <template

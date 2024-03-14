@@ -1,15 +1,15 @@
 <script setup>
 const props = defineProps({
-  icon: {
-    type: String,
-    required: false,
-    default: 'tabler-x',
-  },
-  iconSize: {
-    type: String,
-    required: false,
-    default: '20',
-  },
+    icon: {
+        type: String,
+        required: false,
+        default: 'tabler-x',
+    },
+    iconSize: {
+        type: String,
+        required: false,
+        default: '20',
+    },
 })
 </script>
 

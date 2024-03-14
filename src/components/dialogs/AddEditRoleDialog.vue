@@ -2,80 +2,77 @@
 import { VForm } from 'vuetify/components/VForm'
 
 const props = defineProps({
-  rolePermissions: {
-    type: Object,
-    required: false,
-    default: () => ({
-      name: '',
-      permissions: [],
-    }),
-  },
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    rolePermissions: {
+        type: Object,
+        required: false,
+        default: () => ({
+            name: '',
+            permissions: [],
+        }),
+    },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
-const emit = defineEmits([
-  'update:isDialogVisible',
-  'update:rolePermissions',
-])
+const emit = defineEmits(['update:isDialogVisible', 'update:rolePermissions'])
 
 const permissions = ref([
-  {
-    name: 'User Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Content Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Disputes Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Database Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Financial Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Reporting',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'API Control',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Repository Management',
-    read: false,
-    write: false,
-    create: false,
-  },
-  {
-    name: 'Payroll',
-    read: false,
-    write: false,
-    create: false,
-  },
+    {
+        name: 'User Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Content Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Disputes Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Database Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Financial Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Reporting',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'API Control',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Repository Management',
+        read: false,
+        write: false,
+        create: false,
+    },
+    {
+        name: 'Payroll',
+        read: false,
+        write: false,
+        create: false,
+    },
 ])
 
 const isSelectAll = ref(false)
@@ -83,68 +80,74 @@ const role = ref('')
 const refPermissionForm = ref()
 
 const checkedCount = computed(() => {
-  let counter = 0
-  permissions.value.forEach(permission => {
-    Object.entries(permission).forEach(([key, value]) => {
-      if (key !== 'name' && value)
-        counter++
+    let counter = 0
+    permissions.value.forEach((permission) => {
+        Object.entries(permission).forEach(([key, value]) => {
+            if (key !== 'name' && value) counter++
+        })
     })
-  })
-  
-  return counter
+
+    return counter
 })
 
-const isIndeterminate = computed(() => checkedCount.value > 0 && checkedCount.value < permissions.value.length * 3)
+const isIndeterminate = computed(
+    () => checkedCount.value > 0 && checkedCount.value < permissions.value.length * 3
+)
 
-watch(isSelectAll, val => {
-  permissions.value = permissions.value.map(permission => ({
-    ...permission,
-    read: val,
-    write: val,
-    create: val,
-  }))
+watch(isSelectAll, (val) => {
+    permissions.value = permissions.value.map((permission) => ({
+        ...permission,
+        read: val,
+        write: val,
+        create: val,
+    }))
 })
 watch(isIndeterminate, () => {
-  if (!isIndeterminate.value)
-    isSelectAll.value = false
+    if (!isIndeterminate.value) isSelectAll.value = false
 })
-watch(permissions, () => {
-  if (checkedCount.value === permissions.value.length * 3)
-    isSelectAll.value = true
-}, { deep: true })
+watch(
+    permissions,
+    () => {
+        if (checkedCount.value === permissions.value.length * 3) isSelectAll.value = true
+    },
+    { deep: true }
+)
 watch(props, () => {
-  if (props.rolePermissions && props.rolePermissions.permissions.length) {
-    role.value = props.rolePermissions.name
-    permissions.value = permissions.value.map(permission => {
-      const rolePermission = props.rolePermissions?.permissions.find(item => item.name === permission.name)
-      if (rolePermission) {
-        return {
-          ...permission,
-          ...rolePermission,
-        }
-      }
-      
-      return permission
-    })
-  }
+    if (props.rolePermissions && props.rolePermissions.permissions.length) {
+        role.value = props.rolePermissions.name
+        permissions.value = permissions.value.map((permission) => {
+            const rolePermission = props.rolePermissions?.permissions.find(
+                (item) => item.name === permission.name
+            )
+
+            if (rolePermission) {
+                return {
+                    ...permission,
+                    ...rolePermission,
+                }
+            }
+
+            return permission
+        })
+    }
 })
 
 const onSubmit = () => {
-  const rolePermissions = {
-    name: role.value,
-    permissions: permissions.value,
-  }
+    const rolePermissions = {
+        name: role.value,
+        permissions: permissions.value,
+    }
 
-  emit('update:rolePermissions', rolePermissions)
-  emit('update:isDialogVisible', false)
-  isSelectAll.value = false
-  refPermissionForm.value?.reset()
+    emit('update:rolePermissions', rolePermissions)
+    emit('update:isDialogVisible', false)
+    isSelectAll.value = false
+    refPermissionForm.value?.reset()
 }
 
 const onReset = () => {
-  emit('update:isDialogVisible', false)
-  isSelectAll.value = false
-  refPermissionForm.value?.reset()
+    emit('update:isDialogVisible', false)
+    isSelectAll.value = false
+    refPermissionForm.value?.reset()
 }
 </script>
 
@@ -262,21 +265,21 @@ const onReset = () => {
 
 <style lang="scss">
 .permission-table {
-  td {
-    border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
-    padding-block: 0.5rem;
+    td {
+        border-block-end: 1px solid rgba(var(--v-border-color), var(--v-border-opacity));
+        padding-block: 0.5rem;
 
-    .v-checkbox {
-      min-inline-size: 4.75rem;
-    }
+        .v-checkbox {
+            min-inline-size: 4.75rem;
+        }
 
-    &:not(:first-child) {
-      padding-inline: 0.5rem;
-    }
+        &:not(:first-child) {
+            padding-inline: 0.5rem;
+        }
 
-    .v-label {
-      white-space: nowrap;
+        .v-label {
+            white-space: nowrap;
+        }
     }
-  }
 }
 </style>

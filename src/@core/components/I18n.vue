@@ -1,14 +1,14 @@
 <script setup>
 const props = defineProps({
-  languages: {
-    type: Array,
-    required: true,
-  },
-  location: {
-    type: null,
-    required: false,
-    default: 'bottom end',
-  },
+    languages: {
+        type: Array,
+        required: true,
+    },
+    location: {
+        type: null,
+        required: false,
+        default: 'bottom end',
+    },
 })
 
 const { locale } = useI18n({ useScope: 'global' })

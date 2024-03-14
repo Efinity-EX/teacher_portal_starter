@@ -1,24 +1,23 @@
 <script setup>
 const props = defineProps({
-  selectedCheckbox: {
-    type: Array,
-    required: true,
-  },
-  checkboxContent: {
-    type: Array,
-    required: true,
-  },
-  gridColumn: {
-    type: null,
-    required: false,
-  },
+    selectedCheckbox: {
+        type: Array,
+        required: true,
+    },
+    checkboxContent: {
+        type: Array,
+        required: true,
+    },
+    gridColumn: {
+        type: null,
+        required: false,
+    },
 })
 
 const emit = defineEmits(['update:selectedCheckbox'])
 
-const updateSelectedOption = value => {
-  if (typeof value !== 'boolean' && value !== null)
-    emit('update:selectedCheckbox', value)
+const updateSelectedOption = (value) => {
+    if (typeof value !== 'boolean' && value !== null) emit('update:selectedCheckbox', value)
 }
 </script>
 
@@ -65,33 +64,33 @@ const updateSelectedOption = value => {
 
 <style lang="scss" scoped>
 .custom-checkbox-icon {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 
-  .v-checkbox {
-    margin-block-end: -0.375rem;
+    .v-checkbox {
+        margin-block-end: -0.375rem;
 
-    .v-selection-control__wrapper {
-      margin-inline-start: 0;
+        .v-selection-control__wrapper {
+            margin-inline-start: 0;
+        }
     }
-  }
 
-  .cr-title {
-    font-weight: 500;
-    line-height: 1.375rem;
-  }
+    .cr-title {
+        font-weight: 500;
+        line-height: 1.375rem;
+    }
 }
 </style>
 
 <style lang="scss">
 .custom-checkbox-icon {
-  .v-checkbox {
-    margin-block-end: -0.375rem;
+    .v-checkbox {
+        margin-block-end: -0.375rem;
 
-    .v-selection-control__wrapper {
-      margin-inline-start: 0;
+        .v-selection-control__wrapper {
+            margin-inline-start: 0;
+        }
     }
-  }
 }
 </style>

@@ -2,36 +2,36 @@
 import AppSearchHeaderBg from '@images/pages/app-search-header-bg.png'
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: false,
-  },
-  subtitle: {
-    type: String,
-    required: false,
-  },
-  customClass: {
-    type: String,
-    required: false,
-  },
-  placeholder: {
-    type: String,
-    required: false,
-  },
-  density: {
-    type: String,
-    required: false,
-    default: 'comfortable',
-  },
-  isReverse: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
+    title: {
+        type: String,
+        required: false,
+    },
+    subtitle: {
+        type: String,
+        required: false,
+    },
+    customClass: {
+        type: String,
+        required: false,
+    },
+    placeholder: {
+        type: String,
+        required: false,
+    },
+    density: {
+        type: String,
+        required: false,
+        default: 'comfortable',
+    },
+    isReverse: {
+        type: Boolean,
+        required: false,
+        default: false,
+    },
 })
 
 defineOptions({
-  inheritAttrs: false,
+    inheritAttrs: false,
 })
 </script>
 
@@ -51,7 +51,7 @@ defineOptions({
       </slot>
       <div
         class="d-flex"
-        :class="isReverse ? 'flex-column' : 'flex-column-reverse' "
+        :class="isReverse ? 'flex-column' : 'flex-column-reverse'"
       >
         <p class="mb-0">
           {{ props.subtitle }}
@@ -73,20 +73,20 @@ defineOptions({
 
 <style lang="scss">
 .search-header {
-  padding: 4rem !important;
-  background-size: cover !important;
+    padding: 4rem !important;
+    background-size: cover !important;
 }
 
 // search input
 .search-header-input {
-  border-radius: 0.375rem !important;
-  background-color: rgb(var(--v-theme-surface));
-  max-inline-size: 28.125rem !important;
+    border-radius: 0.375rem !important;
+    background-color: rgb(var(--v-theme-surface));
+    max-inline-size: 28.125rem !important;
 }
 
 @media (max-width: 37.5rem) {
-  .search-header {
-    padding: 1.5rem !important;
-  }
+    .search-header {
+        padding: 1.5rem !important;
+    }
 }
 </style>

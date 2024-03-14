@@ -12,34 +12,40 @@ import '@core/scss/template/libs/vuetify/index.scss'
 import 'vuetify/styles'
 
 export default function (app) {
-  const cookieThemeValues = {
-    defaultTheme: resolveVuetifyTheme(themeConfig.app.theme),
-    themes: {
-      light: {
-        colors: {
-          'primary': cookieRef('lightThemePrimaryColor', staticPrimaryColor).value,
-          'primary-darken-1': cookieRef('lightThemePrimaryDarkenColor', staticPrimaryDarkenColor).value,
+    const cookieThemeValues = {
+        defaultTheme: resolveVuetifyTheme(themeConfig.app.theme),
+        themes: {
+            light: {
+                colors: {
+                    primary: cookieRef('lightThemePrimaryColor', staticPrimaryColor).value,
+                    'primary-darken-1': cookieRef(
+                        'lightThemePrimaryDarkenColor',
+                        staticPrimaryDarkenColor
+                    ).value,
+                },
+            },
+            dark: {
+                colors: {
+                    primary: cookieRef('darkThemePrimaryColor', staticPrimaryColor).value,
+                    'primary-darken-1': cookieRef(
+                        'darkThemePrimaryDarkenColor',
+                        staticPrimaryDarkenColor
+                    ).value,
+                },
+            },
         },
-      },
-      dark: {
-        colors: {
-          'primary': cookieRef('darkThemePrimaryColor', staticPrimaryColor).value,
-          'primary-darken-1': cookieRef('darkThemePrimaryDarkenColor', staticPrimaryDarkenColor).value,
+    }
+
+    const optionTheme = deepMerge({ themes }, cookieThemeValues)
+
+    const vuetify = createVuetify({
+        aliases: {
+            IconBtn: VBtn,
         },
-      },
-    },
-  }
+        defaults,
+        icons,
+        theme: optionTheme,
+    })
 
-  const optionTheme = deepMerge({ themes }, cookieThemeValues)
-
-  const vuetify = createVuetify({
-    aliases: {
-      IconBtn: VBtn,
-    },
-    defaults,
-    icons,
-    theme: optionTheme,
-  })
-
-  app.use(vuetify)
+    app.use(vuetify)
 }

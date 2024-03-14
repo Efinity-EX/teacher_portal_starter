@@ -5,34 +5,34 @@ import rocket from '@images/svg/rocket.svg'
 import { themeConfig } from '@themeConfig'
 
 const props = defineProps({
-  isDialogVisible: {
-    type: Boolean,
-    required: true,
-  },
+    isDialogVisible: {
+        type: Boolean,
+        required: true,
+    },
 })
 
 const emit = defineEmits(['update:isDialogVisible'])
 
-const dialogVisibleUpdate = val => {
-  emit('update:isDialogVisible', val)
+const dialogVisibleUpdate = (val) => {
+    emit('update:isDialogVisible', val)
 }
 
 const referAndEarnSteps = [
-  {
-    icon: paper,
-    title: 'Send Invitation 👍🏻',
-    subtitle: 'Send your referral link to your friend',
-  },
-  {
-    icon: keyboard,
-    title: 'Registration 😎',
-    subtitle: 'Let them register to our services',
-  },
-  {
-    icon: rocket,
-    title: 'Free Trial  🎉',
-    subtitle: 'Your friend will get 30 days free trial',
-  },
+    {
+        icon: paper,
+        title: 'Send Invitation 👍🏻',
+        subtitle: 'Send your referral link to your friend',
+    },
+    {
+        icon: keyboard,
+        title: 'Registration 😎',
+        subtitle: 'Let them register to our services',
+    },
+    {
+        icon: rocket,
+        title: 'Free Trial  🎉',
+        subtitle: 'Your friend will get 30 days free trial',
+    },
 ]
 </script>
 
@@ -51,7 +51,8 @@ const referAndEarnSteps = [
           Refer & Earn
         </h4>
         <p class="text-body-1 mb-6 text-center">
-          Invite your friend to <span class="text-capitalize">{{ themeConfig.app.title }}</span>, if they sign up, you and your friend will get 30 days free trial
+          Invite your friend to
+          <span class="text-capitalize">{{ themeConfig.app.title }}</span>, if they sign up, you and your friend will get 30 days free trial
         </p>
 
         <VRow class="text-center mt-8">
@@ -171,8 +172,8 @@ const referAndEarnSteps = [
 
 <style lang="scss">
 .refer-link-input {
-  .v-field--appended {
-    padding-inline-end: 0;
-  }
+    .v-field--appended {
+        padding-inline-end: 0;
+    }
 }
 </style>

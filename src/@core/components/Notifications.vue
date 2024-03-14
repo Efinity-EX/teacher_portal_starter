@@ -2,48 +2,39 @@
 import { PerfectScrollbar } from 'vue3-perfect-scrollbar'
 
 const props = defineProps({
-  notifications: {
-    type: Array,
-    required: true,
-  },
-  badgeProps: {
-    type: Object,
-    required: false,
-    default: undefined,
-  },
-  location: {
-    type: null,
-    required: false,
-    default: 'bottom end',
-  },
+    notifications: {
+        type: Array,
+        required: true,
+    },
+    badgeProps: {
+        type: Object,
+        required: false,
+        default: undefined,
+    },
+    location: {
+        type: null,
+        required: false,
+        default: 'bottom end',
+    },
 })
 
-const emit = defineEmits([
-  'read',
-  'unread',
-  'remove',
-  'click:notification',
-])
+const emit = defineEmits(['read', 'unread', 'remove', 'click:notification'])
 
-const isAllMarkRead = computed(() => props.notifications.some(item => item.isSeen === false))
+const isAllMarkRead = computed(() => props.notifications.some((item) => item.isSeen === false))
 
 const markAllReadOrUnread = () => {
-  const allNotificationsIds = props.notifications.map(item => item.id)
-  if (!isAllMarkRead.value)
-    emit('unread', allNotificationsIds)
-  else
-    emit('read', allNotificationsIds)
+    const allNotificationsIds = props.notifications.map((item) => item.id)
+    if (!isAllMarkRead.value) emit('unread', allNotificationsIds)
+    else emit('read', allNotificationsIds)
 }
 
 const totalUnseenNotifications = computed(() => {
-  return props.notifications.filter(item => item.isSeen === false).length
+    return props.notifications.filter((item) => item.isSeen === false).length
 })
 
 const toggleReadUnread = (isSeen, Id) => {
-  if (isSeen)
-    emit('unread', [Id])
-  else
-    emit('read', [Id])
+    if (isSeen) emit('unread', [Id])
+    else emit('read', [Id])
 }
 </script>
 
@@ -51,7 +42,7 @@ const toggleReadUnread = (isSeen, Id) => {
   <IconBtn id="notification-btn">
     <VBadge
       v-bind="props.badgeProps"
-      :model-value="props.notifications.some(n => !n.isSeen)"
+      :model-value="props.notifications.some((n) => !n.isSeen)"
       color="error"
       dot
       offset-x="2"
@@ -79,7 +70,7 @@ const toggleReadUnread = (isSeen, Id) => {
 
           <template #append>
             <VChip
-              v-show="props.notifications.some(n => !n.isSeen)"
+              v-show="props.notifications.some((n) => !n.isSeen)"
               size="small"
               color="primary"
               class="me-2"
@@ -94,7 +85,7 @@ const toggleReadUnread = (isSeen, Id) => {
               <VIcon
                 size="20"
                 color="high-emphasis"
-                :icon="!isAllMarkRead ? 'tabler-mail' : 'tabler-mail-opened' "
+                :icon="!isAllMarkRead ? 'tabler-mail' : 'tabler-mail-opened'"
               />
 
               <VTooltip
@@ -112,7 +103,7 @@ const toggleReadUnread = (isSeen, Id) => {
         <!-- 👉 Notifications list -->
         <PerfectScrollbar
           :options="{ wheelPropagation: false }"
-          style="max-block-size: 23.75rem;"
+          style="max-block-size: 23.75rem"
         >
           <VList class="notification-list rounded-0 py-0">
             <template
@@ -132,12 +123,18 @@ const toggleReadUnread = (isSeen, Id) => {
                 <div class="d-flex align-start gap-3">
                   <VAvatar
                     size="40"
-                    :color="notification.color && notification.icon ? notification.color : undefined"
+                    :color="
+                      notification.color && notification.icon
+                        ? notification.color
+                        : undefined
+                    "
                     :image="notification.img || undefined"
                     :icon="notification.icon || undefined"
-                    :variant="notification.img ? undefined : 'tonal' "
+                    :variant="notification.img ? undefined : 'tonal'"
                   >
-                    <span v-if="notification.text">{{ avatarText(notification.text) }}</span>
+                    <span v-if="notification.text">{{
+                      avatarText(notification.text)
+                    }}</span>
                   </VAvatar>
 
                   <div>
@@ -146,13 +143,19 @@ const toggleReadUnread = (isSeen, Id) => {
                     </p>
                     <p
                       class="text-body-2 mb-2"
-                      style=" letter-spacing: 0.4px !important; line-height: 18px;"
+                      style="
+                                                letter-spacing: 0.4px !important;
+                                                line-height: 18px;
+                                            "
                     >
                       {{ notification.subtitle }}
                     </p>
                     <p
                       class="text-sm text-disabled mb-0"
-                      style=" letter-spacing: 0.4px !important; line-height: 18px;"
+                      style="
+                                                letter-spacing: 0.4px !important;
+                                                line-height: 18px;
+                                            "
                     >
                       {{ notification.time }}
                     </p>
@@ -166,7 +169,12 @@ const toggleReadUnread = (isSeen, Id) => {
                       :color="!notification.isSeen ? 'primary' : '#a8aaae'"
                       :class="`${notification.isSeen ? 'visible-in-hover' : ''}`"
                       class="mb-2"
-                      @click.stop="toggleReadUnread(notification.isSeen, notification.id)"
+                      @click.stop="
+                        toggleReadUnread(
+                          notification.isSeen,
+                          notification.id
+                        )
+                      "
                     />
 
                     <VIcon
@@ -183,7 +191,7 @@ const toggleReadUnread = (isSeen, Id) => {
             <VListItem
               v-show="!props.notifications.length"
               class="text-center text-medium-emphasis"
-              style="block-size: 56px;"
+              style="block-size: 56px"
             >
               <VListItemTitle>No Notification Found!</VListItemTitle>
             </VListItem>
@@ -211,37 +219,37 @@ const toggleReadUnread = (isSeen, Id) => {
 
 <style lang="scss">
 .notification-section {
-  padding-block: 0.75rem;
-  padding-inline: 1rem;
+    padding-block: 0.75rem;
+    padding-inline: 1rem;
 }
 
 .list-item-hover-class {
-  .visible-in-hover {
-    display: none;
-  }
-
-  &:hover {
     .visible-in-hover {
-      display: block;
+        display: none;
     }
-  }
+
+    &:hover {
+        .visible-in-hover {
+            display: block;
+        }
+    }
 }
 
 .notification-list.v-list {
-  .v-list-item {
-    border-radius: 0 !important;
-    margin: 0 !important;
-    padding-block: 0.75rem !important;
-  }
+    .v-list-item {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        padding-block: 0.75rem !important;
+    }
 }
 
 // Badge Style Override for Notification Badge
 .notification-badge {
-  .v-badge__badge {
-    /* stylelint-disable-next-line liberty/use-logical-spec */
-    min-width: 18px;
-    padding: 0;
-    block-size: 18px;
-  }
+    .v-badge__badge {
+        /* stylelint-disable-next-line liberty/use-logical-spec */
+        min-width: 18px;
+        padding: 0;
+        block-size: 18px;
+    }
 }
 </style>

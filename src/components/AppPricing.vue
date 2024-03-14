@@ -4,98 +4,83 @@ import spaceRocket from '@images/misc/3d-space-rocket-with-smoke.png'
 import dollarCoinPiggyBank from '@images/misc/dollar-coins-flying-pink-piggy-bank.png'
 
 const props = defineProps({
-  title: {
-    type: String,
-    required: false,
-  },
-  xs: {
-    type: [
-      Number,
-      String,
-    ],
-    required: false,
-  },
-  sm: {
-    type: [
-      Number,
-      String,
-    ],
-    required: false,
-  },
-  md: {
-    type: [
-      String,
-      Number,
-    ],
-    required: false,
-  },
-  lg: {
-    type: [
-      String,
-      Number,
-    ],
-    required: false,
-  },
-  xl: {
-    type: [
-      String,
-      Number,
-    ],
-    required: false,
-  },
+    title: {
+        type: String,
+        required: false,
+    },
+    xs: {
+        type: [Number, String],
+        required: false,
+    },
+    sm: {
+        type: [Number, String],
+        required: false,
+    },
+    md: {
+        type: [String, Number],
+        required: false,
+    },
+    lg: {
+        type: [String, Number],
+        required: false,
+    },
+    xl: {
+        type: [String, Number],
+        required: false,
+    },
 })
 
 const annualMonthlyPlanPriceToggler = ref(true)
 
 const pricingPlans = [
-  {
-    name: 'Basic',
-    tagLine: 'A simple start for everyone',
-    logo: dollarCoinPiggyBank,
-    monthlyPrice: 0,
-    yearlyPrice: 0,
-    isPopular: false,
-    current: true,
-    features: [
-      '100 responses a month',
-      'Unlimited forms and surveys',
-      'Unlimited fields',
-      'Basic form creation tools',
-      'Up to 2 subdomains',
-    ],
-  },
-  {
-    name: 'Standard',
-    tagLine: 'For small to medium businesses',
-    logo: safeBoxWithGoldenCoin,
-    monthlyPrice: 49,
-    yearlyPrice: 499,
-    isPopular: true,
-    current: false,
-    features: [
-      'Unlimited responses',
-      'Unlimited forms and surveys',
-      'Instagram profile page',
-      'Google Docs integration',
-      'Custom “Thank you” page',
-    ],
-  },
-  {
-    name: 'Enterprise',
-    tagLine: 'Solution for big organizations',
-    logo: spaceRocket,
-    monthlyPrice: 99,
-    yearlyPrice: 999,
-    isPopular: false,
-    current: false,
-    features: [
-      'PayPal payments',
-      'Logic Jumps',
-      'File upload with 5GB storage',
-      'Custom domain support',
-      'Stripe integration',
-    ],
-  },
+    {
+        name: 'Basic',
+        tagLine: 'A simple start for everyone',
+        logo: dollarCoinPiggyBank,
+        monthlyPrice: 0,
+        yearlyPrice: 0,
+        isPopular: false,
+        current: true,
+        features: [
+            '100 responses a month',
+            'Unlimited forms and surveys',
+            'Unlimited fields',
+            'Basic form creation tools',
+            'Up to 2 subdomains',
+        ],
+    },
+    {
+        name: 'Standard',
+        tagLine: 'For small to medium businesses',
+        logo: safeBoxWithGoldenCoin,
+        monthlyPrice: 49,
+        yearlyPrice: 499,
+        isPopular: true,
+        current: false,
+        features: [
+            'Unlimited responses',
+            'Unlimited forms and surveys',
+            'Instagram profile page',
+            'Google Docs integration',
+            'Custom “Thank you” page',
+        ],
+    },
+    {
+        name: 'Enterprise',
+        tagLine: 'Solution for big organizations',
+        logo: spaceRocket,
+        monthlyPrice: 99,
+        yearlyPrice: 999,
+        isPopular: false,
+        current: false,
+        features: [
+            'PayPal payments',
+            'Logic Jumps',
+            'File upload with 5GB storage',
+            'Custom domain support',
+            'Stripe integration',
+        ],
+    },
 ]
 </script>
 
@@ -167,7 +152,7 @@ const pricingPlans = [
         :class="plan.isPopular ? 'border-primary border-opacity-100' : ''"
       >
         <VCardText
-          style="block-size: 3.75rem;"
+          style="block-size: 3.75rem"
           class="text-end"
         >
           <!-- 👉 Popular -->
@@ -206,7 +191,11 @@ const pricingPlans = [
                 $
               </div>
               <h1 class="text-h1 font-weight-medium text-primary">
-                {{ annualMonthlyPlanPriceToggler ? Math.floor(Number(plan.yearlyPrice) / 12) : plan.monthlyPrice }}
+                {{
+                  annualMonthlyPlanPriceToggler
+                    ? Math.floor(Number(plan.yearlyPrice) / 12)
+                    : plan.monthlyPrice
+                }}
               </h1>
               <div class="text-body-1 font-weight-medium align-self-end">
                 /month
@@ -262,17 +251,17 @@ const pricingPlans = [
 
 <style lang="scss" scoped>
 .card-list {
-  --v-card-list-gap: 1rem;
+    --v-card-list-gap: 1rem;
 }
 
 .save-upto-chip {
-  inset-block-start: -2.4rem;
-  inset-inline-end: -6rem;
+    inset-block-start: -2.4rem;
+    inset-inline-end: -6rem;
 }
 
 .annual-price-text {
-  inset-block-end: 3%;
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
+    inset-block-end: 3%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
 }
 </style>
