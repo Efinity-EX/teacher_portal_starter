@@ -1,0 +1,34 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - name: Install Dependencies
+      run: npm install
+    - name: Run Tests
+      run: npm run test
+    - name: Build
+      run: npm run build
+    - name: Deploy to IIS or other servers
+      if: github.ref == 'refs/heads/main'
+      run: |
+        # Use FTP or other methods to copy the dist folder to your server
+        # Or use a specific action like appleboy/ssh-action for SSH deployment
+        # Or use a specific action like SamKirkland/FTP-Deploy-Action for FTP
