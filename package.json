@@ -13,6 +13,7 @@
     "postinstall": "npm run build:icons && npm run msw:init",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server/server.js",
     "start:prod": "cross-env NODE_ENV=production node ./server/server.js",
+    "deploy": "gh-pages -d dist",
     "lint:fix": "eslint --fix \"./**/*.{js,jsx,ts,tsx,vue}\""
   },
   "dependencies": {
@@ -96,6 +97,7 @@
     "eslint-plugin-sonarjs": "0.23.0",
     "eslint-plugin-unicorn": "50.0.1",
     "eslint-plugin-vue": "9.22.0",
+    "gh-pages": "^6.1.1",
     "msw": "2.2.2",
     "nodemon": "^3.1.0",
     "postcss-html": "1.6.0",
